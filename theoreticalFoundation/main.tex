@@ -4,28 +4,20 @@
 \usepackage{times}
 \usepackage{cite}
 \usepackage{graphicx}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
 \usepackage{amssymb}
 \usepackage{siunitx}
 \usepackage{caption}
-\usepackage{subcaption}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{amsfonts}
 %\usepackage{amsmath}
 \usepackage{csquotes}
 \usepackage{url}
-\usepackage{wrapfig}
-\usepackage{booktabs}
-\usepackage{pgfplotstable}
-\usepackage{pgfplots}
-\pgfplotsset{compat=newest}
 \usepackage{amsthm}
 \usepackage{listings}
 \newtheorem{theorem}{Theorem}[section]
-% \theoremstyle{definition}
-% \newtheorem{definition}{Definition}[section]
 \usepackage{color}
 \usepackage{verbatim}
 \usepackage{mathtools}
@@ -34,16 +26,23 @@
 
 \begin{document}
 
-\title{Streaming Version of the Standard Matrix Reduction}
+\title{Streaming Version of the Matrix Reduction}
 
 \maketitle
 
 \section{The Problem}
 
-The standard algorithm \cite{edelsbrunner-00, zomorodian-05} reduces the boundary matrix $\partial$ 
-of a filtration to the column-echelon form $R$.  Usually the entire boundary matrix or a simplified 
-data structure thereof is processed in the memory while the algorithm is executed.  This approach 
-is not desirable when computing persistent homology on streaming data.
+The standard algorithm \cite{edelsbrunner-00, zomorodian-05} \emph{reduces} the boundary matrix 
+$\partial$ of a filtration \cite{zomorodian-10} to the column-echelon form $R$.  Usually, the 
+entire boundary matrix or a simplified data structure thereof is processed in the memory while the 
+standard algorithm is executed.  This approach is not desirable when computing persistent homology 
+on streaming data.  As a data stream is a potentially infinite sequence of data objects, the entire 
+stream cannot be stored in the memory typically available to a computer.  Therefore, the 
+computation of persistent homology on streaming data requires an incremental approach.  When 
+working with data streams, one would want to add a simplex $\sigma$ to the already reduced matrix 
+$R$ without having to recompute the reduction of other columns due to the addition of $\sigma$.  
+Ideally, only the column of $\sigma$ should be reduced as the simplex $\sigma$ is added to the 
+filtration.
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
