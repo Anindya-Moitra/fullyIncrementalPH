@@ -32,6 +32,13 @@
 
 \section{The Problem}
 
+This document addresses one of the primary challenges of computing persistent homology on streaming 
+data by a fully incremental approach.  
+
+This document attempts to develop the theoretical foundation of performing \emph{Gaussian 
+elimination} of the boundary 
+
+
 The standard algorithm \cite{edelsbrunner-00, zomorodian-05} \emph{reduces} the boundary matrix 
 $\partial$ of a filtration \cite{zomorodian-10} to the column-echelon form $R$.  Usually, the 
 entire boundary matrix or a simplified data structure thereof is processed in the memory while the 
@@ -43,6 +50,8 @@ working with data streams, one would want to add a simplex $\sigma$ to the alrea
 $R$ without having to recompute the reduction of other columns due to the addition of $\sigma$.  
 Ideally, only the column of $\sigma$ should be reduced as the simplex $\sigma$ is added to the 
 filtration.
+
+
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
