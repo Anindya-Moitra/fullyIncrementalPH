@@ -36,15 +36,14 @@ This document addresses one of the primary challenges of computing persistent ho
 data by a fully incremental approach.  As a data stream is a potentially infinite sequence of data 
 objects, the entire stream cannot be stored in the memory typically available to a computer.  
 Therefore, the computation of persistent homology on streaming data requires an incremental 
-approach. A couple of computational models for applying persistent homology on data streams are 
+approach.  A couple of computational models for applying persistent homology on data streams are 
 being developed as two separate projects.  Consistent with the standard computational paradigm 
 \cite{silva-13} for processing data streams, each of those two models consists of two principal 
 components: (i) \emph{online}, and (ii) \emph{offline}.  However, yet another (\emph{i.e.}, a 
-third) computational model can be developed for computing of persistent homology by a \emph{fully 
-online} or \emph{fully incremental} approach.
-
-This document attempts to develop the theoretical foundation of performing \emph{Gaussian 
-elimination} of the boundary 
+third) computational model can be developed for computing of persistent homology on streaming data 
+by a \emph{fully online} or \emph{fully incremental} approach.  This document attempts to develop 
+the theoretical foundation for performing the \emph{Gaussian elimination} (also called the 
+\emph{reduction}) 
 
 
 The standard algorithm \cite{edelsbrunner-00, zomorodian-05} \emph{reduces} the boundary matrix 
