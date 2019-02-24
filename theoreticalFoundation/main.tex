@@ -32,16 +32,25 @@
 
 \section{The Problem}
 
+As a data stream is a potentially infinite sequence of data objects, the entire stream cannot be 
+stored in the memory typically available to a computer.  Therefore, the computation of persistent 
+homology on streaming data requires an incremental approach.  A couple of computational models for 
+applying persistent homology on data streams are being developed as two separate projects.  
+Consistent with the standard computational paradigm \cite{silva-13} for processing data streams, 
+each of those two models consists of two principal components: (i) \emph{online}, and (ii) 
+\emph{offline}.  However, yet another (\emph{i.e.}, a third) computational model can be developed 
+for computing of persistent homology on streaming data by a \emph{fully online} or \emph{fully 
+incremental} approach.
+
+
+
 This document addresses one of the primary challenges of computing persistent homology on streaming 
-data by a fully incremental approach.  As a data stream is a potentially infinite sequence of data 
-objects, the entire stream cannot be stored in the memory typically available to a computer.  
-Therefore, the computation of persistent homology on streaming data requires an incremental 
-approach.  A couple of computational models for applying persistent homology on data streams are 
-being developed as two separate projects.  Consistent with the standard computational paradigm 
-\cite{silva-13} for processing data streams, each of those two models consists of two principal 
-components: (i) \emph{online}, and (ii) \emph{offline}.  However, yet another (\emph{i.e.}, a 
-third) computational model can be developed for computing of persistent homology on streaming data 
-by a \emph{fully online} or \emph{fully incremental} approach.  This document attempts to develop 
+data by a fully incremental approach.  
+
+A key requirement of developing such a fully incremental model for persistent homology would be 
+
+
+This document attempts to develop 
 the theoretical foundation for performing the \emph{Gaussian elimination} (also called the 
 \emph{reduction}) of the boundary matrix \cite{edelsbrunner-00, zomorodian-05} by an incremental 
 algorithm.  The Gaussian elimination of the boundary matrix is performed during the offline 
