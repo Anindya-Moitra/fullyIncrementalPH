@@ -47,21 +47,10 @@ developed by a \emph{fully online} or \emph{fully incremental} approach.
 A key requirement for developing such a fully incremental model for persistent homology would be 
 the ability to perform the \emph{Gaussian elimination} (also called the \emph{reduction}) of the 
 boundary matrix \cite{edelsbrunner-00, zomorodian-05} by an incremental algorithm.  The Gaussian 
-elimination is performed during the offline component (\emph{i.e.}, as a \emph{batch processing} 
-mechanism) in the previous two models for computing persistent homology on streaming data.
-
-
- 
-
- 
-
-
-This document attempts to develop 
-the theoretical foundation for performing the \emph{Gaussian elimination} (also called the 
-\emph{reduction}) of the boundary matrix \cite{edelsbrunner-00, zomorodian-05} by an incremental 
-algorithm.  The Gaussian elimination of the boundary matrix is performed during the offline 
-component (as a \emph{batch processing} mechanism) in the previous two models for computing 
-persistent homology on streaming data.
+elimination step is performed during the offline component (\emph{i.e.}, as a \emph{batch 
+processing} mechanism) in the previous two models for computing persistent homology on streaming 
+data.  This document attempts to develop the theoretical foundation for performing the 
+\emph{Gaussian elimination} by an incremental algorithm.
 
 
 The standard algorithm \cite{edelsbrunner-00, zomorodian-05} \emph{reduces} the boundary matrix 
