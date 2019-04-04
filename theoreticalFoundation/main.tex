@@ -57,10 +57,11 @@ The standard algorithm \cite{edelsbrunner-00, zomorodian-05} \emph{reduces} the 
 $\partial$ of a filtration \cite{zomorodian-10} to the column-echelon form $R$.  Usually, the 
 entire boundary matrix or a simplified data structure thereof is processed in the memory while the 
 standard algorithm is executed.  This approach is not desirable when computing persistent homology 
-on streaming data.  When working with data streams, one would want to add a simplex $\sigma$ to the 
-already reduced matrix $R$ without having to recompute the reduction of other columns due to the 
-addition of $\sigma$.  Ideally, only the column of $\sigma$ should be reduced as the simplex 
-$\sigma$ is added to the filtration.
+on streaming data by a fully incremental mechanism.  When working with data streams processed by a 
+fully incremental model, one would want to add a simplex $\sigma$ to the already reduced matrix $R$ 
+without having to recompute the reduction of other columns due to the addition of $\sigma$.  
+Ideally, only the column of $\sigma$ should be reduced as the simplex $\sigma$ is added to the 
+filtration.
 
 
 
