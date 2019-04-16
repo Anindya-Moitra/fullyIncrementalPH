@@ -63,16 +63,16 @@ without having to recompute the reduction of other columns due to the addition o
 Ideally, only the column of $\sigma$ should be reduced as the simplex $\sigma$ is added to the 
 filtration.
 
-It is worth mentioning that while computing persistent homology on data streams can be one of the 
-primary target applications of the incremental Gaussian elimination algorithm, the algorithm will 
-have other important applications as well.  For example, due to the large size of the 
-\emph{complex} constructed on a point cloud, the dimension of the boundary matrix increases 
-exponentially with the number of data objects on which persistent homology is being computed.  
-As a result, reducing the boundary matrix by a batch processing algorithm becomes prohibitive even 
-for `static' (\emph{i.e.}, non-streaming) data sets of moderate size (such as, from a few hundreds 
-to a few thousand data objects, depending on the memory available to the computer).  The 
-incremental algorithm developed by this project will help in the Gaussian elimination of the 
-boundary matrix that, otherwise, is not possible to accomplish due to the high memory requirements.
+It is worth mentioning that while computing persistent homology on data streams is one of the 
+primary target applications of the incremental Gaussian elimination algorithm, it will have other 
+important applications as well.  For example, due to the large size of the \emph{complex} 
+constructed on a point cloud, the dimension of the boundary matrix increases exponentially with the 
+number of data objects on which persistent homology is being computed.  As a result, reducing the 
+boundary matrix by a batch processing algorithm becomes prohibitive even for `static' (\emph{i.e.}, 
+non-streaming) data sets of moderate size (such as, from a few hundreds to a few thousands of data 
+objects, depending on the memory available to the computer).  The incremental algorithm developed 
+by this project will help in the Gaussian elimination of the boundary matrix that, otherwise, is 
+not possible due to the high memory requirements.
 
 
 
