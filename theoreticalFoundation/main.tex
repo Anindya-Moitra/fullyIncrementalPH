@@ -16,7 +16,7 @@
 \usepackage{csquotes}
 \usepackage{url}
 \usepackage{amsthm}
-\usepackage{listings}
+% \usepackage{listings}
 \newtheorem{theorem}{Theorem}[section]
 \usepackage{color}
 \usepackage{verbatim}
@@ -69,7 +69,7 @@ important applications as well.  For example, due to the large size of the \emph
 constructed on a point cloud, the dimension of the boundary matrix increases exponentially with the 
 number of data objects on which persistent homology is being computed.  As a result, reducing the 
 boundary matrix by a batch processing algorithm becomes prohibitive even for `static' (\emph{i.e.}, 
-non-streaming) data sets of moderate size (such as, from a few hundreds to a few thousands of data 
+non-streaming) data sets of moderate size (such as, data sets with up to a few thousands of 
 objects, depending on the memory available to the computer).  The incremental algorithm developed 
 by this project will help in the Gaussian elimination of the boundary matrix that, otherwise, is 
 not possible due to the high memory requirements.
