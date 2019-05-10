@@ -76,6 +76,13 @@ not possible due to the high memory requirements of persistent homology (even fo
 sets of small to moderate size).
 
 
+Kerber \textit{et al.} \cite{kerber-18} introduced a streaming algorithm for reducing the boundary 
+matrix based on optimized versions of the standard algorithm.  However, their algorithm assumes 
+that the entire data set or filtration is available on disk.  Therefore, the total ordering of the 
+simplices is predetermined.  The next simplex added to $R$ has a higher weight than any of the 
+previously added simplices.
+
+
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
