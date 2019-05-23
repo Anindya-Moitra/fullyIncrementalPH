@@ -83,6 +83,14 @@ available on disk.  Therefore, the total ordering of the simplices is predetermi
 simplex added to $R$ has a higher weight than any of the previously added simplices.
 
 
+In a real streaming application, the entire point cloud or filtration is not available at any 
+time.  Hence, every time a new simplex $\sigma$ is added to the filtration, the indices of those 
+simplices that have weights higher than that of $\sigma$ are incremented by one.  In other words, 
+in a real streaming environment, new simplices do not arrive from a sequence of simplices sorted 
+according to their increasing weights.  Therefore, the algorithm of \cite{kerber-18} can not be 
+applied to real-world streaming applications.
+
+
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
