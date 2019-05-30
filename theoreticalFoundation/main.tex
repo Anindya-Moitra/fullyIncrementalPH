@@ -71,9 +71,8 @@ number of data objects on which persistent homology is being computed.  As a res
 boundary matrix by a batch processing algorithm becomes prohibitive even for `static' (\emph{i.e.}, 
 non-streaming) data sets of moderate size (such as, data sets with up to a few thousands of 
 objects, depending on the memory available to the computer).  The incremental algorithm developed 
-by this project will help in the Gaussian elimination of the boundary matrix that, otherwise, is 
-not possible due to the high memory requirements of persistent homology (even for `static' data 
-sets of small to moderate size).
+by this project will help in the Gaussian elimination of the boundary matrix where this is 
+not possible by batch processing mechanisms due to the size of the matrix.
 
 
 Kerber \textit{et al.} \cite{kerber-18} introduced a streaming algorithm for reducing the boundary 
@@ -92,10 +91,10 @@ applied to real-world streaming applications.
 
 
 
-In this document, we prove that a streaming version of the standard algorithm exists.  In 
-particular, we prove that even when a simplex $\sigma$ that changes the indices of other simplices 
-is added to an already reduced matrix $R$, it is possible to only reduce the column of $\sigma$ 
-without recomputing the reduction of other columns.
+In this document, we prove that a streaming or incremental version of the standard algorithm 
+exists.  In particular, we prove that even when a simplex $\sigma$ that changes the indices of 
+other simplices is added to an already reduced matrix $R$, it is possible to only reduce the column 
+of $\sigma$ without recomputing the reduction of other columns.
 
 
 
