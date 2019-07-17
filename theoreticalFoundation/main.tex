@@ -98,6 +98,16 @@ of $\sigma$ without recomputing the reduction of other columns.
 
 
 
+\section{A Solution}
+
+An incremental variant of the standard algorithm can be described as follows.  Let us assume that a 
+boundary matrix $\partial$ is already reduced to the column-echelon form $R$.  When a new simplex 
+$\sigma$ arrives, we compute its index $j$ with respect to the existing filtration.  We also 
+compute the row $r$ and the \emph{unreduced} column $c$ of $\sigma$. $c$ specifies the 
+facets\footnote{A facet is a co-dimension one face of a simplex.} of $\sigma$, while $r$ contains 
+only zeroes.
+
+
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
 
