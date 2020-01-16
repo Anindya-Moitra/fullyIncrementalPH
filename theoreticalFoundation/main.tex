@@ -125,7 +125,12 @@ only zeroes.
 	An existing simplex $\tau \in K$ can become a facet of $\sigma$.  However, $\tau$ can never be 
 	a cofacet\footnote{A cofacet is a co-dimension one coface of a simplex.} of $\sigma$.  In other 
 	words, an existing simplex of $K$ can be a facet of a new simplex, but the new simplex can not 
-	be a facet of an existing simplex.
+	be a facet of an existing simplex.  This is due to the definition of the simplicial complex 
+	$K$: every face of an existing simplex $\tau$ must already be contained in $K$.
+	
+	The $j$-th column of the boundary matrix $\partial$ encodes the facets of the simplex 
+	$\sigma_j$, and the $i$-th row of $\partial$ encodes the cofacets of $\sigma_i$.  Since the new 
+	simplex $\sigma$ can not have an existing cofacet, $r$ contains only zeroes.
 	
 \end{proof}
 
