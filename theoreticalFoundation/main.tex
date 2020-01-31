@@ -144,7 +144,9 @@ only zeroes.
 	When a new data point arrives from the stream, the corresponding new simplices are created by 
 	iteratively adding the cofaces upto the maximum dimension $k$.  The data point itself creates a 
 	0-simplex.  When that 0-simplex is added to $R$, it has no effect on the existing persistence 
-	intervals.  This is because the column of a 0-simplex contains only zeroes.
+	intervals.  This is because the column of a 0-simplex contains only zeroes.  The addition of 
+	the subsequent cofaces of the 0-simplex can not introduce a pivot that equals the pivot of a 
+	higher column in $R$.
 	
 \end{proof}
 
