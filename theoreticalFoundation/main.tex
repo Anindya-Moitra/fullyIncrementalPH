@@ -146,7 +146,14 @@ only zeroes.
 	0-simplex.  When that 0-simplex is added to $R$, it has no effect on the existing persistence 
 	intervals.  This is because the column of a 0-simplex contains only zeroes.  The addition of 
 	the subsequent cofaces of the 0-simplex can not introduce a pivot that equals the pivot of a 
-	higher column in $R$.
+	higher column in $R$, because:
+	
+	
+	\begin{itemize}
+		\item with the addition of a new simplex at column $j$, the existing pivots greater than 
+		$j$ are incremented by one (due to the accompanied addition of a row at the position $j$),
+		\item $R$ is upper-triangular.
+	\end{itemize}
 	
 \end{proof}
 
