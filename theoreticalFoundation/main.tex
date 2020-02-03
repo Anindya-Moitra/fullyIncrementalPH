@@ -152,7 +152,10 @@ only zeroes.
 	\begin{itemize}
 		\item with the addition of a new simplex at column $j$, the existing pivots greater than 
 		$j$ are incremented by one (due to the accompanied addition of a row at the position $j$),
-		\item $R$ is upper-triangular.
+		\item $R$ is upper-triangular,
+		\item the data points (\textit{i.e.}, the 0-simplices) from the stream are assumed to 
+		arrive sequentially, and thus, have a natural total ordering,
+		\item the simplices always have a total ordering dictated by the filtration.
 	\end{itemize}
 	
 \end{proof}
