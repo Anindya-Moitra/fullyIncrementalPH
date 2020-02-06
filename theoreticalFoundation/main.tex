@@ -157,6 +157,12 @@ only zeroes.
 		arrive sequentially, and thus, have a natural total ordering,
 		\item the simplices always have a total ordering dictated by the filtration.
 	\end{itemize}
+
+
+Therefore, when a column $c$ corresponding to a new simplex is added to $R$ at the position $j$, 
+the new column can not have the same pivot as a column greater than $j$.  The new column $j$ and 
+those to its right will have unique pivots, which implies that we would not need to reduce the 
+columns to the right of $j$.
 	
 \end{proof}
 
