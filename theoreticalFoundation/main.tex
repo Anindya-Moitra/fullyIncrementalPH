@@ -121,6 +121,7 @@ only zeroes.
 
 
 \begin{proof}
+	
 	Assume that the new simplex $\sigma$ is added to an existing filtered simplicial complex $K$.  
 	An existing simplex $\tau \in K$ can become a facet of $\sigma$.  However, $\tau$ can never be 
 	a cofacet\footnote{A cofacet is a co-dimension one coface of a simplex.} of $\sigma$.  In other 
@@ -157,12 +158,13 @@ only zeroes.
 		arrive sequentially, and thus, have a natural total ordering,
 		\item the simplices always have a total ordering dictated by the filtration.
 	\end{itemize}
-
-
-Therefore, when a column $c$ corresponding to a new simplex is added to $R$ at the position $j$, 
-the new column can not have the same pivot as a column greater than $j$.  The new column $j$ and 
-those to its right will have unique pivots, which implies that we would not need to reduce the 
-columns to the right of $j$.
+	
+	
+	Therefore, when a column $c$ that corresponds to a new simplex is added to $R$ at the position 
+	$j$, the new column can not have the same pivot as a column greater than $j$.  The new column 
+	$j$ and those to its right will have unique pivots, which implies that we would not need to 
+	reduce the columns to the right of $j$.
+	
 	
 \end{proof}
 
