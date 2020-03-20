@@ -163,10 +163,16 @@ only zeroes.
 	Therefore, when a column $c$ that corresponds to a new simplex is added to $R$ at the position 
 	$j$, the new column can not have the same pivot as a column greater than $j$.  The new column 
 	$j$ and those to its right will have unique pivots, which implies that we would not need to 
-	reduce the columns to the right of $j$.
-	
+	reduce the columns to the right of $j$.	
 	
 \end{proof}
+
+
+\section{Discussion}
+
+The algorithm could be optimized in several ways, such as those given in \cite{kerber-18}.  An 
+efficient implementation of the algorithm would require data structures such as sparse matrix 
+\cite{edelsbrunner-10}, T-array \cite{zomorodian-05} or dictionary \cite{kerber-18}.
 
 
 \bibliographystyle{IEEEtran}
