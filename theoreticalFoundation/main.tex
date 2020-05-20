@@ -35,7 +35,7 @@
 
 \maketitle
 
-\section{The Problem}
+\section{The Background}
 
 This document addresses one of the primary challenges of computing persistent homology on streaming 
 data by a fully incremental approach.  As a data stream is a potentially infinite sequence of data 
@@ -45,17 +45,34 @@ approach.  A couple of computational models for applying persistent homology on 
 being developed as two separate projects that involve partially incremental approaches.  In 
 particular, consistent with the standard computational paradigm \cite{silva-13} for processing 
 data streams, each of those two models consists of two principal components: (i) \emph{online}, and 
-(ii) \emph{offline}.  However, yet another (\emph{i.e.}, a third) computational model can be 
-developed by a \emph{fully online} or \emph{fully incremental} approach.
+(ii) \emph{offline}.  However, yet another (\emph{i.e.}, a third) computational model is developed 
+by a \emph{fully online} or \emph{fully incremental} approach in this project.
 
 
-A key requirement for developing such a fully incremental model for persistent homology would be 
-the ability to perform the \emph{Gaussian elimination} (also called the \emph{reduction}) of the 
+A key requirement for developing such a fully incremental model for persistent homology is the 
+ability to perform the \emph{Gaussian elimination} (also called the \emph{reduction}) of the 
 boundary matrix \cite{edelsbrunner-00, zomorodian-05} by an incremental algorithm.  The Gaussian 
 elimination step is performed during the offline component (\emph{i.e.}, as a \emph{batch 
 processing} mechanism) in the previous two models for computing persistent homology on streaming 
-data.  This document attempts to develop the theoretical foundation for performing the 
-\emph{Gaussian elimination} by an incremental algorithm.
+data.  This document develops the theoretical foundation for performing the \emph{Gaussian 
+elimination} by an incremental algorithm.
+
+
+It is worth mentioning that while computing persistent homology on data streams is one of the 
+primary target applications of the incremental Gaussian elimination algorithm, it will have other 
+important applications as well.  For example, due to the large size of the \emph{complex} 
+constructed on a point cloud, the dimension of the boundary matrix increases exponentially with the 
+number of data objects on which persistent homology is being computed.  As a result, reducing the 
+boundary matrix by a batch processing algorithm becomes prohibitive even for `static' (\emph{i.e.}, 
+non-streaming) data sets of moderate size (such as, data sets with up to a few thousands of 
+objects, depending on the memory available to the computer).  The incremental algorithm developed 
+by this project will help in the Gaussian elimination of the boundary matrix where this is 
+not possible by batch processing mechanisms due to the size of the matrix.
+
+
+
+
+\section{The Problem}
 
 
 The standard algorithm \cite{edelsbrunner-00, zomorodian-05} \emph{reduces} the boundary matrix 
@@ -68,16 +85,7 @@ without having to recompute the reduction of other columns due to the addition o
 Ideally, only the column of $\sigma$ should be reduced as the simplex $\sigma$ is added to the 
 filtration.
 
-It is worth mentioning that while computing persistent homology on data streams is one of the 
-primary target applications of the incremental Gaussian elimination algorithm, it will have other 
-important applications as well.  For example, due to the large size of the \emph{complex} 
-constructed on a point cloud, the dimension of the boundary matrix increases exponentially with the 
-number of data objects on which persistent homology is being computed.  As a result, reducing the 
-boundary matrix by a batch processing algorithm becomes prohibitive even for `static' (\emph{i.e.}, 
-non-streaming) data sets of moderate size (such as, data sets with up to a few thousands of 
-objects, depending on the memory available to the computer).  The incremental algorithm developed 
-by this project will help in the Gaussian elimination of the boundary matrix where this is 
-not possible by batch processing mechanisms due to the size of the matrix.
+
 
 
 Kerber \textit{et al.} \cite{kerber-18} introduced a streaming algorithm for reducing the boundary 
