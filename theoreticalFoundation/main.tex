@@ -102,11 +102,10 @@ added to the right of $R$.  Therefore, the algorithm of \cite{kerber-18} can not
 real-world streaming applications.
 
 
-
-In this document, we prove that a streaming or incremental version of the standard algorithm 
-exists.  In particular, we prove that even when a simplex $\sigma$ that changes the 
-indices of other simplices is added to an already reduced matrix $R$, it is possible to only reduce 
-the column of $\sigma$ without recomputing the reduction of other columns.
+In the next section, we provide two algorithms to incrementally reduce a boundary matrix after the 
+addition of simplices.  The goal of both of the algorithms is to compute the updated reduction of 
+the boundary matrix $\partial$ when new columns are added to $R$, the existing reduction of 
+$\partial$.
 
 
 
