@@ -109,78 +109,14 @@ $\partial$.
 
 
 
-\section{A Solution}
+\section{Addition of Simplices: Two Solutions}
 
-\subsection{Incremental Matrix Reduction Algorithm}
+\subsection{Algorithm 1}
 
-An incremental variant of the standard algorithm can be described as follows.  Let us assume that a 
-boundary matrix $\partial$ is already reduced to the column-echelon form $R$.  When a new simplex 
-$\sigma$ arrives, we compute its index $j$ with respect to the existing filtration.  We also 
-compute the row $r$ and the \emph{unreduced} column $c$ of $\sigma$. $c$ specifies the 
-facets\footnote{A facet is a co-dimension one face of a simplex.} of $\sigma$, while $r$ contains 
-only zeroes.
-
-\begin{theorem}
-	The algorithm described above computes the correct persistence intervals.
-\end{theorem}
-
-
-
-\begin{proof}
-	
-	Assume that the new simplex $\sigma$ is added to an existing filtered simplicial complex $K$.  
-	An existing simplex $\tau \in K$ can become a facet of $\sigma$.  However, $\tau$ can never be 
-	a cofacet\footnote{A cofacet is a co-dimension one coface of a simplex.} of $\sigma$.  In other 
-	words, an existing simplex of $K$ can be a facet of a new simplex, but the new simplex can not 
-	be a facet of an existing simplex.  This is due to the definition of the simplicial complex 
-	$K$: every face of an existing simplex $\tau$ must already be contained in $K$.
-	
-	The $j$-th column of the boundary matrix $\partial$ encodes the facets of the simplex 
-	$\sigma_j$, and the $i$-th row of $\partial$ encodes the cofacets of $\sigma_i$.  Since the new 
-	simplex $\sigma$ can not have an existing cofacet, $r$ contains only zeroes.
-	
-	
-	The standard algorithm iterates over the columns of the boundary matrix $\partial$ from left to 
-	right, reducing the columns by \emph{left-to-right column additions}.  Therefore, the newly 
-	added $j$-th column $c$ needs to be reduced according to the standard column reduction 
-	procedure described above.
-	
-	
-	We call $R$ reduced when all the pivots are in unique rows.  It is well-known that, although 
-	$\partial$ does not have a unique reduction, the pivots of all its reductions are the same.  
-	When a new data point arrives from the stream, the corresponding new simplices are created by 
-	iteratively adding the cofaces upto the maximum dimension $k$.  The data point itself creates a 
-	$0$-simplex.  When that $0$-simplex is added to $R$, it has no effect on the existing 
-	persistence 
-	intervals.  This is because the column of a $0$-simplex contains only zeroes.  The addition of 
-	the subsequent cofaces of the $0$-simplex can not introduce a pivot that equals the pivot of a 
-	higher column in $R$, because:
-	
-	
-	\begin{itemize}
-		\item with the addition of a new simplex at column $j$, the existing pivots greater than 
-		$j$ are incremented by one (due to the accompanied addition of a row at the position $j$),
-		\item $R$ is upper-triangular,
-		\item the data points (\textit{i.e.}, the $0$-simplices) from the stream are assumed to 
-		arrive sequentially, and thus, have a natural total ordering,
-		\item the simplices always have a total ordering dictated by the filtration.
-	\end{itemize}
-	
-	
-	Therefore, when a column $c$ that corresponds to a new simplex is added to $R$ at the position 
-	$j$, the new column can not have the same pivot as a column greater than $j$.  The new column 
-	$j$ and those to its right will have unique pivots, which implies that we would not need to 
-	reduce the columns to the right of $j$.	
-	
-\end{proof}
-
-
-\section{Discussion}
-
-The incremental matrix reduction algorithm describer here could be optimized in several ways, such 
-as those given in \cite{kerber-18}.  An efficient implementation of the algorithm would require 
-data structures such as sparse matrix \cite{edelsbrunner-10}, T-array \cite{zomorodian-05} or 
-dictionary \cite{kerber-18}.
+Let us assume that $R$ is the reduction of a boundary matrix $\partial$ associated to a filtration 
+$K$ that has $n$ simplices.  When a new simplex $\sigma$ needs to be added to $R$, we compute the 
+index $j$ and the unreduced column $\partial_j$ of $\sigma$ with respect to the total ordering of 
+the filtration.  $\partial_j$ specifies the facets of $\sigma$.
 
 
 \bibliographystyle{IEEEtran}
