@@ -86,7 +86,7 @@ $\sigma$ to the already reduced matrix $R$ without having to recompute the reduc
 columns due to the addition of $\sigma$.
 
 
-Kerber \textit{et al.} \cite{kerber-18} introduced a streaming algorithm for reducing the boundary 
+Kerber \emph{et al.} \cite{kerber-18} introduced a streaming algorithm for reducing the boundary 
 matrix based on optimized versions of the standard algorithm \cite{edelsbrunner-00, 
 zomorodian-05}.  However, their algorithm assumes that the entire data set or filtration is 
 available on disk.  Therefore, the total ordering of all the simplices in the filtration is known 
@@ -116,7 +116,14 @@ $\partial$.
 Let us assume that $R$ is the reduction of a boundary matrix $\partial$ associated to a filtration 
 $K$ that has $n$ simplices.  When a new simplex $\sigma$ needs to be added to $R$, we compute the 
 index $j$ and the unreduced column $\partial_j$ of $\sigma$ with respect to the total ordering of 
-the filtration.  $\partial_j$ specifies the facets of $\sigma$.
+the filtration.  $\partial_j$ specifies the facets\footnote{A facet is a co-dimension one face of a 
+simplex.} of $\sigma$.
+
+We then apply an optimization technique called \emph{compression} \cite{kerber-18} on the column 
+$\partial_j$ : scan through the non-zero entries of $\partial_j$; If a row index $i$ corresponds to 
+a negative simplex (\emph{i.e.}, if the $i$-th column of $R$ is not zero), remove the non-zero entry
+from the column $\partial_j$.  We then insert the compressed column $\partial_j$ in $R$ as the new 
+$j$-th column.
 
 
 \bibliographystyle{IEEEtran}
