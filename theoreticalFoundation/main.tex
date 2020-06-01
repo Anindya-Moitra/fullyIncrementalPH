@@ -123,7 +123,10 @@ We then apply an optimization technique called \emph{compression} \cite{kerber-1
 $\partial_j$: scan through the non-zero entries of $\partial_j$; If a row index $i$ corresponds to 
 a negative simplex (\emph{i.e.}, if the $i$-th column of $R$ is not zero), remove the non-zero entry
 from the column $\partial_j$.  We then insert the compressed column $\partial_j$ in $R$ as the new 
-$j$-th column.
+$j$-th column.  If, due to the addition of $\partial_j$, $R$ becomes unreduced (\emph{i.e.}, if the 
+pivots of the columns of $R$ are no longer in unique rows), scan the columns from $j$ to $n$, and 
+reduce them: while the column $k \geq j$ is non-empty, and its pivot is the pivot of another column 
+$l < k$, add column $l$ to column $k$.
 
 
 \bibliographystyle{IEEEtran}
