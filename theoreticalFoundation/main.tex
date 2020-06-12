@@ -146,11 +146,21 @@ by $R_{org}$.
 	j$.
 	
 	As the new simplex $\sigma$ is added to the filtration $K$, an existing simplex $\tau \in K$ 
-	can become a facet of $\sigma$.  However, $\tau$ can never be a cofacet of $\sigma$.  In other 
-	words, an existing simplex of $K$ can be a facet of a new simplex, but the new simplex can not 
-	be a facet of an existing simplex.  This is due to the definition of the simplicial complex 
-	$K$: every face of an existing simplex $\tau$ must already be contained in $K$.  It means that 
-	no column $k > j$ can have a non-zero entry in the $j$-th row.
+	can become a facet of $\sigma$.  However, $\tau$ can never be a cofacet\footnote{A cofacet is a 
+	co-dimension one coface of a simplex.} of $\sigma$.  In other words, an existing simplex of $K$ 
+	can be a facet of a new simplex, but the new simplex can not be a facet of an existing 
+	simplex.  This is due to the definition of the simplicial complex $K$: every face of an 
+	existing simplex $\tau$ must already be contained in $K$.  It means that no column $k > j$ can 
+	have a non-zero entry in the $j$-th row.
+	
+	
+	Since any reduced column is a \emph{linear combination of itself and the columns to its left}, 
+	the order of column operations does not alter the reduction of a column.
+	
+	Therefore, $R^\prime$ 
+	and $R_{org}$ have the same pivots and produce the same persistence intervals.
+	
+	
 \end{proof}
 
 
