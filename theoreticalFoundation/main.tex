@@ -170,7 +170,16 @@ by $R_{org}$.
 This algorithm represents a more time-efficient version of Algorithm $1$.  In particular, the 
 addition and reduction of one simplex at a time might not result in an optimal implementation.  As 
 such, we formulate a variant of Algorithm $1$ based on the strategy of the reduction of 
-chunks as suggested in \cite{kerber-18}.
+chunks as suggested in \cite{kerber-18}.  Instead of adding one column at a time, we insert a chunk 
+of $C$ columns at a time into $R$.  An additional advantage of inserting columns in chunks is that 
+we can exploit the popular \emph{clearing optimization} strategy.  When a new data point arrives 
+from the stream, we build all the simplices around the new point using an iterative algorithm 
+\cite{zomorodian-10}.  Therefore, in a streaming environment, every new data point naturally 
+creates a chunk of simplices.  Even though the chunk size $C$ represents a trade-off between time 
+and space efficiency, Kerber \emph{et al.} \cite{kerber-18} recommend that one should choose a 
+large value of $C$ to rip higher benefits from the clearing optimization.  In a real streaming 
+application, we can adjust $C$ based on the stream speed (the number of incoming data points per 
+time unit) and the update frequency of the persistence intervals required by the application.
 
 
 
