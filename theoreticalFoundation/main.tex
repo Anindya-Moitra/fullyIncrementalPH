@@ -179,7 +179,15 @@ creates a chunk of simplices.  Even though the chunk size $C$ represents a trade
 and space efficiency, Kerber \emph{et al.} \cite{kerber-18} recommend that one should choose a 
 large value of $C$ to rip higher benefits from the clearing optimization.  In a real streaming 
 application, we can adjust $C$ based on the stream speed (the number of incoming data points per 
-time unit) and the update frequency of the persistence intervals required by the application.
+time unit) and the update frequency of the persistence intervals required by the application.  The 
+algorithm is described below.
+
+
+We insert $C$ columns into $R$ at a time, and compress them as before.  Let $j$ be the lowest index 
+of the newly inserted columns.  Then, we start the reduction of the columns $j$, $j + 1$, ..., $n$ 
+using the clearing optimization.  That is, we reduce the columns $j$, $j + 1$, ..., $n$ in 
+decreasing dimension and set a column to zero as soon as its index becomes the pivot of another 
+column \cite{chen-11}.
 
 
 
