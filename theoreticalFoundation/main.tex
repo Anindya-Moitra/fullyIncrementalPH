@@ -134,7 +134,7 @@ present in the filtration $K$ to begin with, the reduction obtained from that fi
 by $R_{org}$.
 
 
-\begin{theorem}
+\begin{theorem}\label{th1}
 	$R^\prime$ and $R_{org}$ produce the same persistence intervals.
 \end{theorem}
 
@@ -193,6 +193,16 @@ column \cite{chen-11}.
 \begin{theorem}
 	The above algorithm computes the correct persistence intervals.
 \end{theorem}
+
+
+\begin{proof}
+	
+	The clearing optimization has already been shown to produce the same reduction as the standard
+	algorithm.  In Theorem \ref{th1}, we have shown that incrementally adding and reducing columns  
+	do not alter the persistence intervals.  Therefore, Algorithm $2$ as described above produces 
+	the correct persistence intervals.
+	
+\end{proof}
 
 
 
