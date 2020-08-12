@@ -209,9 +209,13 @@ column \cite{chen-11}.
 
 \section{Deletion of Simplices}
 
+\subsection{Algorithm 3}
+
 When a data point \textbf{x} is removed from the memory, all simplices that have $\{\textbf{x}\}$ 
 as a face are deleted from the simplicial complex $K$. Let $Q$ be the set of simplices that are 
-being removed.
+being deleted.  The columns and rows corresponding to the simplices in $Q$ are deleted from the 
+reduced matrix $R$.  Then, any remaining column of $R$ that the simplices in $Q$ were added to 
+during the reduction are \emph{rebuilt} and reduced.
 
 
 
