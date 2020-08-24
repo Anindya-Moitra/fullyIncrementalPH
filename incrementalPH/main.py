@@ -14,3 +14,17 @@ pointCounter = 0
 windowKeys = []
 partitionLabels = []
 avgNNDistPartitions = {}
+
+key = 0
+
+# f1 = 0.5
+f2 = 4
+f3 = 0.25
+# minWeight = 5   # Partitions with number of points <= minWeight can be potential outliers.
+
+# A partition is considered outdated if it did not receive any new point for more than
+# the last 'timeToBeOutdated' insertions.
+timeToBeOutdated = 10
+
+numPointsPartn = {}   # Create a dictionary to store the number of points in each partition.
+maxKeys = {}   # Create a dictionary to store the maxKey of each partition.
