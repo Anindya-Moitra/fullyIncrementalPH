@@ -28,10 +28,14 @@ timeToBeOutdated = 10
 numPointsPartn = {}   # Create a dictionary to store the number of points in each partition.
 maxKeys = {}   # Create a dictionary to store the maxKey of each partition.
 
-
-for currVec in data:   # Loop through each vector in the data:
+# Loop through each vector in the data: this is analogous to processing data objects from
+# a stream, one at a time.
+for currVec in data:
     # Dump the content of the window to a file with the arrival of every n new data vectors from the stream.
     if (pointCounter % windowMaxSize == 0) and (pointCounter > windowMaxSize):  # Here, n = windowMaxSize
         np.savetxt('windowInstances/p' + str(pointCounter) + '.csv', window, delimiter=',')
     pointCounter += 1
     currVec.shape = (1, dim)
+
+    # Initialize the sliding window. During the initialization, let's assume all points from the stream
+    # belong to Partition 0.
