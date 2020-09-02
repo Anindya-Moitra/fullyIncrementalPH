@@ -20,7 +20,6 @@ key = 0
 # f1 = 0.5
 f2 = 4
 f3 = 0.25
-# minWeight = 5   # Partitions with number of points <= minWeight can be potential outliers.
 
 # A partition is considered outdated if it did not receive any new point for more than
 # the last 'timeToBeOutdated' insertions.
@@ -28,3 +27,11 @@ timeToBeOutdated = 10
 
 numPointsPartn = {}   # Create a dictionary to store the number of points in each partition.
 maxKeys = {}   # Create a dictionary to store the maxKey of each partition.
+
+
+for currVec in data:   # Loop through each vector in the data:
+    # Dump the content of the window to a file with the arrival of every n new data vectors from the stream.
+    if (pointCounter % windowMaxSize == 0) and (pointCounter > windowMaxSize):  # Here, n = windowMaxSize
+        np.savetxt('windowInstances/p' + str(pointCounter) + '.csv', window, delimiter=',')
+    pointCounter += 1
+    currVec.shape = (1, dim)
