@@ -31,11 +31,18 @@ maxKeys = {}   # Create a dictionary to store the maxKey of each partition.
 # Loop through each vector in the data: this is analogous to processing data objects from
 # a stream, one at a time.
 for currVec in data:
-    # Dump the content of the window to a file with the arrival of every n new data vectors from the stream.
-    if (pointCounter % windowMaxSize == 0) and (pointCounter > windowMaxSize):  # Here, n = windowMaxSize
-        np.savetxt('windowInstances/p' + str(pointCounter) + '.csv', window, delimiter=',')
     pointCounter += 1
     currVec.shape = (1, dim)
 
     # Initialize the sliding window. During the initialization, let's assume all points from the stream
-    # belong to Partition 0.
+    # belong to Partition 0.  Besides, we will not compute/update the persistence intervals during the
+    # initialization phase.
+    if window.shape[0] < windowMaxSize:
+        label = 0
+        window = np.append(window, currVec, axis=0)   # Fill the window until it reaches its max size.
+        windowKeys.append(key)
+        partitionLabels.append(label)
+        key += 1
+
+        if window.shape[0] == windowMaxSize:   # Once the window size reaches its max:
+            distMat = np.tril(distance_matrix(window, window))   # Construct the lower triangular distance matrix.
