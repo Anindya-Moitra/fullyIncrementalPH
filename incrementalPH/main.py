@@ -1,7 +1,9 @@
 import numpy as np
-from scipy.spatial import distance_matrix
+# from scipy.spatial import distance_matrix
 import statistics
 import random
+
+import filteredSimplicialComplex
 
 
 data = np.genfromtxt('testData.csv', delimiter=',', skip_header=1)   # Load the entire data as a numpy array.
@@ -20,6 +22,8 @@ key = 0
 # f1 = 0.5
 f2 = 4
 f3 = 0.25
+eps = 5  # The scale parameter for the computation of persistent homology
+k = 1  # The maximum dimension up to which persistent homology will be computed
 
 # A partition is considered outdated if it did not receive any new point for more than
 # the last 'timeToBeOutdated' insertions.
@@ -44,5 +48,13 @@ for currVec in data:
         partitionLabels.append(label)
         key += 1
 
-        if window.shape[0] == windowMaxSize:   # Once the window size reaches its max:
-            distMat = np.tril(distance_matrix(window, window))   # Construct the lower triangular distance matrix.
+        # Once the window size reaches its max size, construct the simplicial complex and compute the
+        # persistence intervals for the first time.
+        if window.shape[0] == windowMaxSize:
+
+            # Construct the neighborhood graph based on the scale parameter epsilon
+            vertices, edges, weights = filteredSimplicialComplex.buildGraph(raw_data=window, epsilon=eps, metric=euclidianDist)
+
+            # Expand the neighborhood graph into a Vietoris-Rips filtration
+            ripsComplex, filterValues = filteredSimplicialComplex.ripsFiltration(nodes, edges, weights, k)
+
