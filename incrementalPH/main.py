@@ -56,5 +56,5 @@ for currVec in data:
             vertices, edges, weights = filteredSimplicialComplex.buildGraph(raw_data=window, epsilon=eps, metric=euclidianDist)
 
             # Expand the neighborhood graph into a Vietoris-Rips filtration
-            ripsComplex, filterValues = filteredSimplicialComplex.ripsFiltration(nodes, edges, weights, k)
+            ripsComplex, filterValues = filteredSimplicialComplex.incrementalRipsComplex(vertices, edges, weights, k)
 
