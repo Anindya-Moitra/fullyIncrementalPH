@@ -25,3 +25,15 @@ def buildGraph(dataPoints, epsilon, metric=euclidianDist):  # dataPoints is a nu
                   edges.append({i, j+i})  # Add edge if distance between points is less than epsilon
                   weights.append([len(edges)-1, dist])  # Store index and weight
   return vertices, edges, weights
+
+
+def lowerNbrs(vertexSet, edgeSet, vertex):  # Lowest neighbors based on the ordering of simplices
+    return {x for x in vertexSet if {x, vertex} in edgeSet and vertex > x}
+
+def incrementalRipsComplex(vertices, edges, weights, k):  # k is the maximal dimension we want to compute
+    ripsComplex = [{n} for n in vertices]
+    filterValues = [0 for j in ripsComplex]  # Vertices have weight value of 0
+    for i in range(len(edges)):  # Add 1-simplices (edges) and associated weight values
+        ripsComplex.append(edges[i])
+        filterValues.append(weights[i])
+        
