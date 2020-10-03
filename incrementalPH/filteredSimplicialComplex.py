@@ -32,8 +32,15 @@ def lowerNbrs(vertexSet, edgeSet, vertex):  # Lowest neighbors based on the orde
 
 def incrementalRipsComplex(vertices, edges, weights, k):  # k is the maximal dimension we want to compute
     ripsComplex = [{n} for n in vertices]
-    filterValues = [0 for j in ripsComplex]  # Vertices have weight value of 0
+    filterValues = [0 for j in ripsComplex]  # A vertex has a weight of 0
     for i in range(len(edges)):  # Add 1-simplices (edges) and associated weight values
         ripsComplex.append(edges[i])
         filterValues.append(weights[i])
-        
+
+    for i in range(k):
+        for simplex in [x for x in ripsComplex if len(x) == i+2]:  # Skip 0-simplices
+            # For each uertex in the simplex
+            nbrs = set.intersection(*[lowerNbrs(vertices, edges, z) for z in simplex])
+            for nbr in nbrs:
+                ripsComplex.append(set.union(simplex, {nbr}))
+    return ripsComplex, filterValues
