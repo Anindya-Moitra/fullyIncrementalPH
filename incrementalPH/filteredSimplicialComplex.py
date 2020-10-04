@@ -44,3 +44,7 @@ def incrementalRipsComplex(vertices, edges, weights, k):  # k is the maximal dim
             for nbr in nbrs:
                 ripsComplex.append(set.union(simplex, {nbr}))
     return ripsComplex, filterValues
+
+
+def getFilterValue(simplex, complex, filterValues):
+    return filterValues[complex.index(simplex)]
