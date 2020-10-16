@@ -53,7 +53,7 @@ for currVec in data:
         if window.shape[0] == windowMaxSize:
 
             # Construct the neighborhood graph based on the scale parameter epsilon
-            vertices, edges, weights = filteredSimplicialComplex.buildGraph(raw_data=window, epsilon=eps, metric=euclidianDist)
+            vertices, edges, weights = filteredSimplicialComplex.buildGraph(dataPoints=window, epsilon=eps, metric=euclidianDist)
 
             # Expand the neighborhood graph into a Vietoris-Rips filtration
             ripsComplex, filterValues = filteredSimplicialComplex.incrementalRipsComplex(vertices, edges, weights, k)
