@@ -49,5 +49,5 @@ def incrementalRipsComplex(vertices, edges, weights, k):  # k is the maximal dim
     return sortComplex(ripsComplex, filterValues)  # Sort simplices according to filter values
 
 
-def getFilterValue(simplex, complex, filterValues):
-    return filterValues[complex.index(simplex)]
+def getFilterValue(simplex, edges, weights):  # Filter value is the maximum weight of an edge in the simplex
+    oneSimplices = list(itertools.combinations(simplex, 2))  # Get set of 1-simplices in the simplex
