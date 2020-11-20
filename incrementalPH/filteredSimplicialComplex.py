@@ -51,3 +51,8 @@ def incrementalRipsComplex(vertices, edges, weights, k):  # k is the maximal dim
 
 def getFilterValue(simplex, edges, weights):  # Filter value is the maximum weight of an edge in the simplex
     oneSimplices = list(itertools.combinations(simplex, 2))  # Get set of 1-simplices in the simplex
+    maxWeight = 0
+    for oneSimplex in oneSimplices:
+        filterValue = weights[edges.index(set(oneSimplex))]
+        if filterValue > maxWeight: maxWeight = filterValue
+    return maxWeight
