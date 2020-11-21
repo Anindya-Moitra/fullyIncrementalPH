@@ -15,3 +15,8 @@ def compareSimplices(simplex1, simplex2):
                 return 1
             else:
                 return -1
+    else:  # If the two simplices do not have the same dimension
+        if len(simplex1[0]) > len(simplex2[0]):  # If simplex1 has a higher dimension than that of simplex2
+            return 1
+        else:
+            return -1
