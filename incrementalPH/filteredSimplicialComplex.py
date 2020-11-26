@@ -2,7 +2,7 @@
 # Courtesy: A. Zomorodian, "Fast construction of the Vietoris-Rips complex", 2010, and outlace.com
 
 import numpy as np
-import matplotlib.pyplot as plt
+import itertools
 
 
 def euclidianDist(a, b):

@@ -1,3 +1,5 @@
+import functools
+
 # The set of functions for imposing a total ordering on the simplices of the weight-filtered complex, constructing
 # the boundary matrix and reducing the boundary matrix.
 
@@ -20,3 +22,10 @@ def compareSimplices(simplex1, simplex2):
             return 1
         else:
             return -1
+
+
+# Sort the simplices in the filtration by their filter values.
+# The simplices in the filtration need to have a total ordering
+def sorSimplices(filteredComplex, filterValues):
+    pairedList = zip(filterComplex, filterValues)
+    
