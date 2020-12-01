@@ -1,7 +1,6 @@
 import functools
 
-# The set of functions for imposing a total ordering on the simplices of the weight-filtered complex, constructing
-# the boundary matrix and reducing the boundary matrix.
+# A set of functions for imposing a total ordering on the simplices of the weight-filtered complex.
 
 # Function to compare two simplices that helps create the total ordering of the simplices.
 # Each simplex is represented as a list, bundled with its filter value: [simplex, filter value] e.g. [{0,1}, 4]
@@ -25,12 +24,12 @@ def compareSimplices(simplex1, simplex2):
 
 
 # Sort the simplices in the filtration by their filter values.
-# The simplices in the filtration need to have a total ordering
-def sorSimplices(filteredComplex, filterValues):
+# The simplices in the filtration need to have a total ordering.
+def sortSimplices(filteredComplex, filterValues):
     pairedList = zip(filterComplex, filterValues)
-    sortedComplex = sorted(pairedList, key=functools.cmp_to_key(compareSimplices))
-    sortedComplex = [list(t) for t in zip(*sortedComplex)]
+    sortedSimplices = sorted(pairedList, key=functools.cmp_to_key(compareSimplices))
+    sortedSimplices = [list(t) for t in zip(*sortedSimplices)]
 
     # Then sort >= 1 simplices in each chain group by the arbitrary total order on the vertices
-    orderValues = [x for x in range(len(filterComplex))]
-    return sortedComplex
+    orderValues = [x for x in range(len(filteredComplex))]
+    return sortedSimplices
