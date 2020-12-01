@@ -28,4 +28,9 @@ def compareSimplices(simplex1, simplex2):
 # The simplices in the filtration need to have a total ordering
 def sorSimplices(filteredComplex, filterValues):
     pairedList = zip(filterComplex, filterValues)
-    
+    sortedComplex = sorted(pairedList, key=functools.cmp_to_key(compareSimplices))
+    sortedComplex = [list(t) for t in zip(*sortedComplex)]
+
+    # Then sort >= 1 simplices in each chain group by the arbitrary total order on the vertices
+    orderValues = [x for x in range(len(filterComplex))]
+    return sortedComplex
