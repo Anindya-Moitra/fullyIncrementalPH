@@ -1,6 +1,7 @@
-import functools
-
 # A set of functions for imposing a total ordering on the simplices of the weight-filtered complex.
+# Courtesy: outlace.com
+
+import functools
 
 # Function to compare two simplices that helps create the total ordering of the simplices.
 # Each simplex is represented as a list, bundled with its filter value: [simplex, filter value] e.g. [{0,1}, 4]
