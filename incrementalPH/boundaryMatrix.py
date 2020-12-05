@@ -1,6 +1,8 @@
 # A set of functions for constructing the boundary matrix.
 # Courtesy: outlace.com
 
+import numpy as np
+
 # A function to return the n-simplices and weights of a complex
 def nSimplices(n, filteredComplex):
     nChain = []
@@ -25,7 +27,14 @@ def checkFace(face, simplex):
 
 
 # A function to construct the boundary matrix
-def buildBoundaryMatrix(filterComplex):
-    bmatrix = np.zeros((len(filterComplex[0]), len(filterComplex[0])), dtype='>i8')
-    # bmatrix[0,:] = 0 #add "zero-th" dimension as first row/column, makes algorithm easier later on
-    # bmatrix[:,0] = 0
+def buildBoundaryMatrix(filteredComplex):
+    boundaryMatrix = np.zeros((len(filteredComplex[0]), len(filteredComplex[0])), dtype=np.uint8)
+
+    i = 0
+    for colSimplex in filteredComplex[0]:
+        j = 0
+        for rowSimplex in filteredComplex[0]:
+            boundaryMatrix[j, i] = checkFace(rowSimplex, colSimplex)
+            j += 1
+        i += 1
+    return boundaryMatrix
