@@ -1,6 +1,8 @@
 # Implementation of the standard algorithm for the reduction of the boundary matrix.
 # Courtesy: A. Zomorodian and G. Carlsson, “Computing persistent homology,” 2005, and outlace.com
 
+import numpy as np
+
 # A function to return the row index of the lowest 1 (pivot) in a column i in the boundary matrix
 def low(i, matrix):
     col = matrix[:, i]
@@ -23,3 +25,13 @@ def isReduced(matrix):
                 return i, j  # Return column i that will be added to column j
 
     return [0, 0]
+
+
+# Implementation of the standard algorithm to iteratively reduce the boundary matrix
+def reduceBoundaryMatrix(matrix):
+    reducedMatrix = matrix.copy()
+    matrixShape = reducedMatrix.shape
+
+
+    memoryMatrix = np.identity(matrixShape[1], dtype=np.uint8)  # This matrix will store the column additions
+    r = isReduced(reducedMatrix)
