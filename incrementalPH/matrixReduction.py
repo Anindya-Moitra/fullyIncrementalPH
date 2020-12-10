@@ -32,6 +32,17 @@ def reduceBoundaryMatrix(matrix):
     reducedMatrix = matrix.copy()
     matrixShape = reducedMatrix.shape
 
-
-    memoryMatrix = np.identity(matrixShape[1], dtype=np.uint8)  # This matrix will store the column additions
+    # 'memoryMatrix' will store the history of column additions
+    memoryMatrix = np.identity(matrixShape[1], dtype=np.uint8)
     r = isReduced(reducedMatrix)
+
+    while (r != [0, 0]):
+        i = r[0]
+        j = r[1]
+        col_j = reducedMatrix[:, j]
+        col_i = reducedMatrix[:, i]
+        reducedMatrix[:, j] = np.bitwise_xor(col_i, col_j)  # Add column i to j
+        memoryMatrix[i, j] = 1
+        r = isReduced(reducedMatrix)
+
+    return reducedMatrix, memoryMatrix
