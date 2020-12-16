@@ -33,3 +33,13 @@ def readIntervals(reducedMatrices, filterValues):
             if epsilonStart == epsilonEnd: intervals.remove(intervals[feature])
 
     return intervals
+
+
+# A function to convert index intervals into epsilon values and to figure out which homology group
+# each interval belongs to.
+def readPersistence(intervals, filteredComplex):
+    persistence = []
+    for interval in intervals:
+        start = interval[0]
+        end = interval[1]
+        
