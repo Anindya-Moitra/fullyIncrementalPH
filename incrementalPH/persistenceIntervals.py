@@ -28,9 +28,9 @@ def readIntervals(reducedMatrices, filterValues):
             # If the interval start point and end point are the same, then this feature begins and dies instantly.
             # So it is a useless interval, we don't want to waste memory keeping it.
 
-            epsilonStart = filterValues[intervals[feature][0]]
-            epsilonEnd = filterValues[j]
-            if epsilonStart == epsilonEnd: intervals.remove(intervals[feature])
+            epsilonBirth = filterValues[intervals[feature][0]]
+            epsilonDeath = filterValues[j]
+            if epsilonBirth == epsilonDeath: intervals.remove(intervals[feature])
 
     return intervals
 
@@ -42,4 +42,11 @@ def readPersistence(intervals, filteredComplex):
     for interval in intervals:
         start = interval[0]
         end = interval[1]
-        
+
+        # 'filteredComplex' is a list of lists [complex, filterValues]
+        homologyGroup = (len(filteredComplex[0][start]) - 1)
+        epsilonBirth = filteredComplex[1][start]
+        epsilonDeath = filteredComplex[1][end]
+        persistence.append([homologyGroup, [epsilonBirth, epsilonDeath]])
+
+    return persistence
