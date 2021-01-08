@@ -3,6 +3,7 @@
 
 import numpy as np
 import itertools
+import totalOrdering
 
 
 def euclidianDist(a, b):
@@ -46,7 +47,7 @@ def incrementalRipsComplex(vertices, edges, weights, k):  # k is the maximal dim
                     ripsComplex.append(newSimplex)
                     filterValues.append(getFilterValue(newSimplex, ripsComplex, filterValues))
 
-    return sortComplex(ripsComplex, filterValues)  # Sort simplices according to filter values
+    return totalOrdering.sortSimplices(ripsComplex, filterValues)  # Sort simplices according to filter values
 
 
 def getFilterValue(simplex, edges, weights):  # Filter value is the maximum weight of an edge in the simplex

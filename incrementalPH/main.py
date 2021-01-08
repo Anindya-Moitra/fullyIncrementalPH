@@ -3,7 +3,9 @@ import numpy as np
 import statistics
 import random
 
-import filteredSimplicialComplex
+import filteredSimplicialComplex as fsc
+import boundaryMatrix as bm
+import matrixReduction as mr
 
 
 data = np.genfromtxt('testData.csv', delimiter=',', skip_header=1)   # Load the entire data as a numpy array.
@@ -53,8 +55,12 @@ for currVec in data:
         if window.shape[0] == windowMaxSize:
 
             # Construct the neighborhood graph based on the scale parameter epsilon
-            vertices, edges, weights = filteredSimplicialComplex.buildGraph(dataPoints=window, epsilon=eps, metric=euclidianDist)
+            vertices, edges, weights = fsc.buildGraph(dataPoints=window,
+                                                      epsilon=eps, metric=euclidianDist)
 
-            # Expand the neighborhood graph into a Vietoris-Rips filtration
-            ripsComplex, filterValues = filteredSimplicialComplex.incrementalRipsComplex(vertices, edges, weights, k)
+            # Expand the neighborhood graph into a weight-filtered Vietoris-Rips filtration
+            sortedSimplices = fsc.incrementalRipsComplex(vertices, edges, weights, k)
 
+            # Construct the boundary matrix and reduce it
+            boundaryMatrix = bm.buildBoundaryMatrix(sortedSimplices)
+            reducedMatrix, memoryMatrix = mr.reduceBoundaryMatrix(boundaryMatrix)
