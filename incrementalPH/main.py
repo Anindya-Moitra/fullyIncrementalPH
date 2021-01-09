@@ -64,3 +64,14 @@ for currVec in data:
             # Construct the boundary matrix and reduce it
             boundaryMatrix = bm.buildBoundaryMatrix(sortedSimplices)
             reducedMatrix, memoryMatrix = mr.reduceBoundaryMatrix(boundaryMatrix)
+
+            # Find the average nearest neighbor distance in the existing partition (i.e. Partition 0).
+            nnDistsPartition0 = []
+            nnDist0thPoint = min(distMat[1:, 0])
+            nnDistsPartition0.append(nnDist0thPoint)
+            for index in range(1, windowMaxSize):
+                row = distMat[index, :index]
+                column = distMat[index + 1:, index]
+                distsFromPoint = np.append(row, column)
+                nnDistPoint = min(distsFromPoint)
+                nnDistsPartition0.append(nnDistPoint)
