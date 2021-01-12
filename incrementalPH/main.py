@@ -75,3 +75,9 @@ for currVec in data:
                 distsFromPoint = np.append(row, column)
                 nnDistPoint = min(distsFromPoint)
                 nnDistsPartition0.append(nnDistPoint)
+
+            avgNNDistPartition0 = statistics.mean(nnDistsPartition0)
+            avgNNDistPartitions[label] = avgNNDistPartition0
+
+            numPointsPartn[label] = windowMaxSize
+            maxKeys[label] = key - 1
