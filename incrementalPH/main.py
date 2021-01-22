@@ -81,3 +81,12 @@ for currVec in data:
 
             numPointsPartn[label] = windowMaxSize
             maxKeys[label] = key - 1
+
+    else:
+        if len(avgNNDistPartitions) == 1:   # If the window is 'pure':
+            # Compute the distances from the current vector to the existing ones in the window.
+            distsFromCurrVec = []
+            for existingVector in window:
+                existingVector.shape = (1, dim)
+                dist = np.linalg.norm(existingVector - currVec)
+                distsFromCurrVec.append(dist)
