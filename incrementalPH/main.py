@@ -90,3 +90,15 @@ for currVec in data:
                 existingVector.shape = (1, dim)
                 dist = np.linalg.norm(existingVector - currVec)
                 distsFromCurrVec.append(dist)
+
+            # Sort the distances from the current vector (to the existing ones in the window) in increasing order.
+            ascendingDists = sorted(distsFromCurrVec)
+
+            # Find the distance from the current vector to its nearest neighbor in the window.
+            nnDistCurrVec = ascendingDists[0]
+
+            print("nnDistCurrVec")
+            print(nnDistCurrVec)
+
+            # Extract the average nearest neighbor distance in the single 'partition' in the window.
+            avgNNDistSinglePartition = list(avgNNDistPartitions.values())[0]
