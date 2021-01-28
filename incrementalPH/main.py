@@ -97,8 +97,20 @@ for currVec in data:
             # Find the distance from the current vector to its nearest neighbor in the window.
             nnDistCurrVec = ascendingDists[0]
 
-            print("nnDistCurrVec")
-            print(nnDistCurrVec)
-
             # Extract the average nearest neighbor distance in the single 'partition' in the window.
             avgNNDistSinglePartition = list(avgNNDistPartitions.values())[0]
+
+            if nnDistCurrVec == 0:
+                print(pointCounter)
+                print(avgNNDistPartitions)
+                print("==============================================================================================")
+                continue
+
+            if avgNNDistSinglePartition <= f3 and nnDistCurrVec <= 1:
+                print(pointCounter)
+                print(avgNNDistPartitions)
+                print("==============================================================================================")
+                continue
+
+            print("avgNNDistSinglePartition")
+            print(avgNNDistSinglePartition)
