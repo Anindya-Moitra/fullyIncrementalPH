@@ -101,16 +101,10 @@ for currVec in data:
             avgNNDistSinglePartition = list(avgNNDistPartitions.values())[0]
 
             if nnDistCurrVec == 0:
-                print(pointCounter)
-                print(avgNNDistPartitions)
-                print("==============================================================================================")
                 continue
 
             if avgNNDistSinglePartition <= f3 and nnDistCurrVec <= 1:
-                print(pointCounter)
-                print(avgNNDistPartitions)
-                print("==============================================================================================")
                 continue
 
-            print("avgNNDistSinglePartition")
-            print(avgNNDistSinglePartition)
+            if avgNNDistSinglePartition == 0 or nnDistCurrVec / avgNNDistSinglePartition > f2:
+                deletedKey = windowKeys.pop(0)   # Delete the key (the lowest key) from the front of the list.
