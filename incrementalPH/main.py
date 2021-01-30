@@ -108,3 +108,17 @@ for currVec in data:
 
             if avgNNDistSinglePartition == 0 or nnDistCurrVec / avgNNDistSinglePartition > f2:
                 deletedKey = windowKeys.pop(0)   # Delete the key (the lowest key) from the front of the list.
+                deletedLabel = partitionLabels.pop(0)  # Delete the label from the front of the list.
+                window = np.delete(window, 0, axis=0)  # Delete the vector from the front of the sliding window.
+
+                # Delete the 0-th row and 0-th column from the distance matrix.
+                distMat = np.delete(np.delete(distMat, 0, axis=0), 0, axis=1)
+
+                # Delete the corresponding distance value from the list of distances from the current vector
+                # to the existing ones in the window.
+                distsFromCurrVec.pop(0)
+
+                # Recompute the average nearest neighbor distance in the existing partition.
+                nnDistsPartition = []
+                nnDist0thPoint = min(distMat[1:, 0])
+                nnDistsPartition.append(nnDist0thPoint)
