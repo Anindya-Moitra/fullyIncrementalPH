@@ -1,4 +1,5 @@
-# A set of functions for building a filtered Vietoris-Rips complex from data point(s)
+# A set of functions for building a filtered Vietoris-Rips complex from data point(s) and for
+# deleting simplices from the complex when a data point is removed from the window.
 # Courtesy: A. Zomorodian, "Fast construction of the Vietoris-Rips complex", 2010, and outlace.com
 
 import numpy as np
@@ -57,3 +58,7 @@ def getFilterValue(simplex, edges, weights):  # Filter value is the maximum weig
         filterValue = weights[edges.index(set(oneSimplex))]
         if filterValue > maxWeight: maxWeight = filterValue
     return maxWeight
+
+# A function for deleting simplices from the complex when a data point is removed from the window.
+def deleteSimplices(sortedSimplices, vertexDel):
+    simplicesDel = set()

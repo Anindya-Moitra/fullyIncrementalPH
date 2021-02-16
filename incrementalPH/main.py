@@ -109,7 +109,14 @@ for currVec in data:
             if avgNNDistSinglePartition == 0 or nnDistCurrVec / avgNNDistSinglePartition > f2:
                 deletedKey = windowKeys.pop(0)   # Delete the key (the lowest key) from the front of the list.
                 deletedLabel = partitionLabels.pop(0)  # Delete the label from the front of the list.
+
+                deletedVector = window[0]  # Verify
                 window = np.delete(window, 0, axis=0)  # Delete the vector from the front of the sliding window.
+
+                # Get the vertex, edges and weights that are being deleted from the neighborhood graph and
+                # from the complex. Reuse the 'buildGraph' function.
+                vertexDel, edgesDel, weightsDel = fsc.buildGraph(dataPoints=deletedVector,
+                                                                 epsilon=eps, metric=euclidianDist)
 
                 # Delete the 0-th row and 0-th column from the distance matrix.
                 distMat = np.delete(np.delete(distMat, 0, axis=0), 0, axis=1)
