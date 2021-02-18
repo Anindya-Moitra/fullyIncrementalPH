@@ -118,6 +118,13 @@ for currVec in data:
                 vertexDel, edgesDel, weightsDel = fsc.buildGraph(dataPoints=deletedVector,
                                                                  epsilon=eps, metric=euclidianDist)
 
+                # Delete the simplices corresponding to 'vertexDel' from the filtration
+                sortedSimplices, delIndices = fsc.deleteSimplices(sortedSimplices, vertexDel)
+
+                # Delete the columns and rows corresponding to the deleted simplices from the reduced
+                # boundary matrix and memory matrix.
+                reducedMatrix, memoryMatrix = mr.delColsRows(reducedMatrix, memoryMatrix, delIndices)
+                
                 # Delete the 0-th row and 0-th column from the distance matrix.
                 distMat = np.delete(np.delete(distMat, 0, axis=0), 0, axis=1)
 

@@ -62,3 +62,10 @@ def getFilterValue(simplex, edges, weights):  # Filter value is the maximum weig
 # A function for deleting simplices from the complex when a data point is removed from the window.
 def deleteSimplices(sortedSimplices, vertexDel):
     simplicesDel = set()
+    delIndices = []
+    for simplex in sortedSimplices:
+        if vertexDel in simplex:
+            simplicesDel.add(simplex)
+            delIndices.append(sortedSimplices.index(simplex))
+
+    return sortedSimplices.difference(simplicesDel), delIndices

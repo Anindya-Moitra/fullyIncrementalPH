@@ -46,3 +46,10 @@ def reduceBoundaryMatrix(matrix):
         r = isReduced(reducedMatrix)
 
     return reducedMatrix, memoryMatrix
+
+def delColsRows(reducedMatrix, memoryMatrix, delIndices):
+
+    # A function to incrementally delete the columns and rows corresponding to the deleted simplices
+    # from the reduced boundary matrix and memory matrix.
+
+    return reducedMatrix, memoryMatrix
