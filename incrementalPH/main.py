@@ -124,7 +124,7 @@ for currVec in data:
                 # Delete the columns and rows corresponding to the deleted simplices from the reduced
                 # boundary matrix and memory matrix.
                 reducedMatrix, memoryMatrix = mr.delColsRows(reducedMatrix, memoryMatrix, delIndices)
-                
+
                 # Delete the 0-th row and 0-th column from the distance matrix.
                 distMat = np.delete(np.delete(distMat, 0, axis=0), 0, axis=1)
 
@@ -136,3 +136,10 @@ for currVec in data:
                 nnDistsPartition = []
                 nnDist0thPoint = min(distMat[1:, 0])
                 nnDistsPartition.append(nnDist0thPoint)
+
+                for index in range(1, windowMaxSize-1):
+                    row = distMat[index, :index]
+                    column = distMat[index + 1:, index]
+                    distsFromPoint = np.append(row, column)
+                    nnDistPoint = min(distsFromPoint)
+                    nnDistsPartition.append(nnDistPoint)
