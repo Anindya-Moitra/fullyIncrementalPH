@@ -143,3 +143,21 @@ for currVec in data:
                     distsFromPoint = np.append(row, column)
                     nnDistPoint = min(distsFromPoint)
                     nnDistsPartition.append(nnDistPoint)
+
+                avgNNDistPartition = statistics.mean(nnDistsPartition)
+                avgNNDistPartitions[deletedLabel] = avgNNDistPartition
+
+                # Decrement the number of points in the existing partition by 1.
+                numPointsPartn[deletedLabel] = windowMaxSize - 1
+
+                print("Point Added")
+
+                # Insert the current vector, its key and a new label into the rear ends
+                # of the corresponding containers.
+                label = deletedLabel + 1
+                window = np.append(window, currVec, axis=0)
+                windowKeys.append(key)
+                partitionLabels.append(label)
+
+                maxKeys[label] = key
+                key += 1
