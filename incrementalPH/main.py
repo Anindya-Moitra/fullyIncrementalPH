@@ -161,3 +161,19 @@ for currVec in data:
 
                 maxKeys[label] = key
                 key += 1
+
+                # Update the distance matrix.
+                distsFromCurrVecArray = np.array(distsFromCurrVec).reshape(1, windowMaxSize - 1)
+                distMat = np.append(distMat, distsFromCurrVecArray, axis=0)  # Add a row to the bottom of the matrix.
+                zeroColumn = np.array([0] * windowMaxSize).reshape(windowMaxSize, 1)
+                distMat = np.append(distMat, zeroColumn, axis=1)  # Add a column to the right of the matrix.
+
+                # Add a new key, value pair to the dictionary of partitions and their average nearest neighbor
+                # distances. In this case, however, the newly created partition has only one point. So, at this
+                # time, we insert a value of -1 for the average nearest neighbor distance of the new point.
+                avgNNDistPartitions[label] = -1
+
+                numPointsPartn[label] = 1
+
+            print(pointCounter)
+            print(avgNNDistPartitions)
