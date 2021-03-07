@@ -150,8 +150,6 @@ for currVec in data:
                 # Decrement the number of points in the existing partition by 1.
                 numPointsPartn[deletedLabel] = windowMaxSize - 1
 
-                print("Point Added")
-
                 # Insert the current vector, its key and a new label into the rear ends
                 # of the corresponding containers.
                 label = deletedLabel + 1
@@ -161,6 +159,15 @@ for currVec in data:
 
                 maxKeys[label] = key
                 key += 1
+
+                InsertedVector = currVec
+
+                # Get the vertex, edges and weights that are being added to the neighborhood graph and
+                # to the complex.
+                vertexAdd, edgesAdd, weightsAdd = fsc.buildGraph(dataPoints=InsertedVector,
+                                                                 epsilon=eps, metric=euclidianDist)
+
+                sortedSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
 
                 # Update the distance matrix.
                 distsFromCurrVecArray = np.array(distsFromCurrVec).reshape(1, windowMaxSize - 1)
@@ -175,5 +182,3 @@ for currVec in data:
 
                 numPointsPartn[label] = 1
 
-            print(pointCounter)
-            print(avgNNDistPartitions)
