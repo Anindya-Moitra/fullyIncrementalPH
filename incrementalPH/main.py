@@ -169,6 +169,8 @@ for currVec in data:
 
                 sortedSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
 
+                reducedMatrix, memoryMatrix = mr.addColsRows(reducedMatrix, memoryMatrix, newSimplices)
+
                 # Update the distance matrix.
                 distsFromCurrVecArray = np.array(distsFromCurrVec).reshape(1, windowMaxSize - 1)
                 distMat = np.append(distMat, distsFromCurrVecArray, axis=0)  # Add a row to the bottom of the matrix.

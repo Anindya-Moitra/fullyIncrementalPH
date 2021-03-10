@@ -53,3 +53,11 @@ def delColsRows(reducedMatrix, memoryMatrix, delIndices):
     # from the reduced boundary matrix and memory matrix.
 
     return reducedMatrix, memoryMatrix
+
+
+def addColsRows(reducedMatrix, memoryMatrix, newSimplices):
+
+    # A function to incrementally add the columns and rows corresponding to the already
+    # reduced boundary matrix, and then further reduce the matrix, if needed.
+
+    return reducedMatrix, memoryMatrix
