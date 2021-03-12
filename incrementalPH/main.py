@@ -193,3 +193,10 @@ for currVec in data:
             # Create a list to store the distances from the current vector to all existing points in the window.
             distsFromCurrVec = [0] * windowMaxSize
 
+            for partition in avgNNDistPartitions:
+                # Find the positions of the points (in the window) that are members of the present 'partition'.
+                indicesOfMembers = [i for i, pl in enumerate(partitionLabels) if pl == partition]
+
+                # Compute the distances from the current vector to the members of the current partition.
+                distsFrmCurrVecToMembrs = []
+
