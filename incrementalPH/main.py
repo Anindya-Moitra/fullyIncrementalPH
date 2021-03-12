@@ -184,3 +184,12 @@ for currVec in data:
 
                 numPointsPartn[label] = 1
 
+
+        else:
+            # Create a dictionary to store the nearest neighbor distance from the current vector to each
+            # partition in the window.
+            nnDistsFrmCurrVecToPartns = {}
+
+            # Create a list to store the distances from the current vector to all existing points in the window.
+            distsFromCurrVec = [0] * windowMaxSize
+
