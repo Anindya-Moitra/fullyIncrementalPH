@@ -199,4 +199,10 @@ for currVec in data:
 
                 # Compute the distances from the current vector to the members of the current partition.
                 distsFrmCurrVecToMembrs = []
+                for idx in indicesOfMembers:
+                    member = window[idx]
+                    member.shape = (1, dim)
+                    dist = np.linalg.norm(member - currVec)
+                    distsFrmCurrVecToMembrs.append(dist)
+                    distsFromCurrVec[idx] = dist
 
