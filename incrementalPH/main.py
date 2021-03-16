@@ -206,3 +206,14 @@ for currVec in data:
                     distsFrmCurrVecToMembrs.append(dist)
                     distsFromCurrVec[idx] = dist
 
+                # Sort the distances from the current vector to the members in the present partition
+                # in increasing order.
+                ascendingDistsToMembrs = sorted(distsFrmCurrVecToMembrs)
+
+                # Find the distance from the current vector to its nearest neighbor in the present partition.
+                nndToPartn = ascendingDistsToMembrs[0]
+
+                # Insert the distance from the current vector to its nearest neighbor in the present partition
+                # into the corresponding dictionary.
+                nnDistsFrmCurrVecToPartns[partition] = nndToPartn
+
