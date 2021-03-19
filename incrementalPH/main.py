@@ -217,3 +217,15 @@ for currVec in data:
                 # into the corresponding dictionary.
                 nnDistsFrmCurrVecToPartns[partition] = nndToPartn
 
+            # Determine the membership of the current vector to one of the existing partitions in the window.
+            # If the current vector cannot be assigned to any of the existing partitions, create a new partition
+            # with only the current vector.
+            targetPartition = determineMembership(nnDistsFrmCurrVecToPartns, avgNNDistPartitions, f2, f3)
+
+            # Find the outdated partition(s).
+            outdatedPartn = [op for op in maxKeys if (key - maxKeys[op]) > timeToBeOutdated]
+
+            if len(outdatedPartn) != 0:  # If there is (are) outdated partition(s):
+                # Find the number(s) of points in the outdated partition(s).
+                numPtsOutdated = [numPointsPartn[npo] for npo in outdatedPartn]
+
