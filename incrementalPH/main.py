@@ -229,3 +229,19 @@ for currVec in data:
                 # Find the number(s) of points in the outdated partition(s).
                 numPtsOutdated = [numPointsPartn[npo] for npo in outdatedPartn]
 
+                # Find the smallest size (i.e. the min. of the number(s) of points) of the outdated partition(s).
+                numPtsSmallestOutdated = min(numPtsOutdated)
+
+                # Find the smallest outdated partition(s).
+                smallestOutdated = [so for so, numPts in numPointsPartn.items() if numPts == numPtsSmallestOutdated]
+
+                partnToBeDeleted = min(smallestOutdated)
+
+                # Find the first occurrence of a partition label from which deletion will take place.
+                for i in range(windowMaxSize):
+                    if partitionLabels[i] == partnToBeDeleted:
+                        deletedLabel = partnToBeDeleted
+                        indexToBeDeleted = i
+                        del partitionLabels[i]  # Delete the partition label.
+                        break
+
