@@ -258,3 +258,13 @@ for currVec in data:
                 # Find the positions of the points (in the window) that are members of the partition
                 # from which the point was deleted.
                 delPmemIndices = [i for i, pl in enumerate(partitionLabels) if pl == deletedLabel]
+
+                # If there are no more points left in the partition from which the deletion took place:
+                if not delPmemIndices:
+                    del avgNNDistPartitions[deletedLabel]
+                    del numPointsPartn[deletedLabel]
+                    del maxKeys[deletedLabel]
+
+                else:
+                    # Decrement the number of points in the partition from which the point was deleted by 1.
+                    numPointsPartn[deletedLabel] = numPtsSmallestOutdated - 1
