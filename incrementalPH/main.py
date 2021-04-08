@@ -268,3 +268,9 @@ for currVec in data:
                 else:
                     # Decrement the number of points in the partition from which the point was deleted by 1.
                     numPointsPartn[deletedLabel] = numPtsSmallestOutdated - 1
+
+                    # Recompute the average nearest neighbor distance in the partition from which the
+                    # point was deleted.
+                    # If there is only 1 point left in the partition that the point was deleted from:
+                    if numPointsPartn[deletedLabel] == 1:
+                        avgNNDistPartitions[deletedLabel] = -1
