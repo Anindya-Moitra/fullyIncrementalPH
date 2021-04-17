@@ -246,6 +246,21 @@ for currVec in data:
                         break
 
                 del windowKeys[indexToBeDeleted]  # Delete the key of the vector.
+
+                deletedVector = window[indexToBeDeleted]
+
+                # Get the vertex, edges and weights that are being deleted from the neighborhood graph and
+                # from the complex. Reuse the 'buildGraph' function.
+                vertexDel, edgesDel, weightsDel = fsc.buildGraph(dataPoints=deletedVector,
+                                                                 epsilon=eps, metric=euclidianDist)
+
+                # Delete the simplices corresponding to 'vertexDel' from the filtration
+                sortedSimplices, delIndices = fsc.deleteSimplices(sortedSimplices, vertexDel)
+
+                # Delete the columns and rows corresponding to the deleted simplices from the reduced
+                # boundary matrix and memory matrix.
+                reducedMatrix, memoryMatrix = mr.delColsRows(reducedMatrix, memoryMatrix, delIndices)
+
                 window = np.delete(window, indexToBeDeleted, axis=0)  # Delete the vector from the sliding window.
 
                 # Delete the corresponding row and column from the distance matrix.
@@ -286,6 +301,4 @@ for currVec in data:
 
                         avgNNdDelPartition = statistics.mean(nnDistsDelPartition)
                         avgNNDistPartitions[deletedLabel] = avgNNdDelPartition
-
-                print("Point Added")
 
