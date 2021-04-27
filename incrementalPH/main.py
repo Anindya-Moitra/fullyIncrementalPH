@@ -302,3 +302,15 @@ for currVec in data:
                         avgNNdDelPartition = statistics.mean(nnDistsDelPartition)
                         avgNNDistPartitions[deletedLabel] = avgNNdDelPartition
 
+                # Insert the current vector, its key and partition label into the rear ends
+                # of the corresponding containers.
+                window = np.append(window, currVec, axis=0)
+                windowKeys.append(key)
+                partitionLabels.append(targetPartition)
+                maxKeys[targetPartition] = key  # Insert or update the maxKey of the target partition.
+
+                # Update the distance matrix.
+                distsFromCurrVecArray = np.array(distsFromCurrVec).reshape(1, windowMaxSize - 1)
+                distMat = np.append(distMat, distsFromCurrVecArray,
+                                    axis=0)  # Add a row to the bottom of the matrix.
+
