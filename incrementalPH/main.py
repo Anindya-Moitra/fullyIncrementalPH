@@ -314,3 +314,14 @@ for currVec in data:
                 distMat = np.append(distMat, distsFromCurrVecArray,
                                     axis=0)  # Add a row to the bottom of the matrix.
 
+                zeroColumn = np.array([0] * windowMaxSize).reshape(windowMaxSize, 1)
+                distMat = np.append(distMat, zeroColumn, axis=1)  # Add a column to the right of the matrix.
+
+                if targetPartition not in avgNNDistPartitions:  # If the current vector was assigned a new partition:
+                    avgNNDistPartitions[targetPartition] = -1
+                    numPointsPartn[targetPartition] = 1
+
+                else:  # The current vector is assigned to one of the existing partitions:
+                    # Retrieve the avg. nearest neighbor distance in the target partition.
+                    avgNNdTP = avgNNDistPartitions[targetPartition]
+
