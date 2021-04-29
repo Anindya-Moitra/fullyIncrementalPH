@@ -325,3 +325,8 @@ for currVec in data:
                     # Retrieve the avg. nearest neighbor distance in the target partition.
                     avgNNdTP = avgNNDistPartitions[targetPartition]
 
+                    if avgNNdTP == -1:   # If the target partition previously had only 1 point:
+                        # Update the avg. nearest neighbor distance of the partition the current vector was added to.
+                        avgNNDistPartitions[targetPartition] = nnDistsFrmCurrVecToPartns[targetPartition]
+                        numPointsPartn[targetPartition] = 2
+
