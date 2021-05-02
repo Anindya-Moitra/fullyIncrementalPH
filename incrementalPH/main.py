@@ -330,3 +330,12 @@ for currVec in data:
                         avgNNDistPartitions[targetPartition] = nnDistsFrmCurrVecToPartns[targetPartition]
                         numPointsPartn[targetPartition] = 2
 
+                    else:
+                        # Find the positions of the points (in the window) that are members of the target partition.
+                        tpMemIndices = [i for i, tp in enumerate(partitionLabels) if tp == targetPartition]
+
+                        # Recompute the average nearest neighbor distance in the target partition.
+                        nnDistsTP = []
+                        for i in tpMemIndices:
+                            row = [distMat[i, :i][j] for j in tpMemIndices if j < i]
+                            column = [distMat[i+1:, i][j - (i+1)] for j in tpMemIndices if j > i]
