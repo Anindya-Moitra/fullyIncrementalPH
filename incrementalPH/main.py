@@ -339,3 +339,17 @@ for currVec in data:
                         for i in tpMemIndices:
                             row = [distMat[i, :i][j] for j in tpMemIndices if j < i]
                             column = [distMat[i+1:, i][j - (i+1)] for j in tpMemIndices if j > i]
+                            distsFromPoint = np.append(row, column)
+                            nnDistPoint = min(distsFromPoint)
+                            nnDistsTP.append(nnDistPoint)
+
+                        avgNNdTargetPartn = statistics.mean(nnDistsTP)
+                        avgNNDistPartitions[targetPartition] = avgNNdTargetPartn
+                        numPointsPartn[targetPartition] = numPointsPartn[targetPartition] + 1
+
+                key += 1
+
+            else:  # There is no outdated partition in the window:
+                if targetPartition not in avgNNDistPartitions:  # If the current vector was assigned a new partition:
+                    deletedKey = windowKeys.pop(0)  # Delete the key (the lowest key) from the front of the list.
+
