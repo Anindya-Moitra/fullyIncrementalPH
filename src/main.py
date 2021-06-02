@@ -363,4 +363,17 @@ for currVec in data:
             else:  # There is no outdated partition in the window:
                 if targetPartition not in avgNNDistPartitions:  # If the current vector was assigned a new partition:
                     deletedKey = windowKeys.pop(0)  # Delete the key (the lowest key) from the front of the list.
+                    deletedLabel = partitionLabels.pop(0)  # Delete the label from the front of the list.
+                    window = np.delete(window, 0, axis=0)  # Delete the vector from the front of the sliding window.
+
+                    # Delete the 0-th row and 0-th column from the distance matrix.
+                    distMat = np.delete(np.delete(distMat, 0, axis=0), 0, axis=1)
+
+                    # Delete the corresponding distance value from the list of distances from the current vector
+                    # to the existing ones in the window.
+                    distsFromCurrVec.pop(0)
+
+                    # Find the positions of the points (in the window) that are members of the partition
+                    # from which the point was deleted.
+                    delPmemIndices = [i for i, pl in enumerate(partitionLabels) if pl == deletedLabel]
 
