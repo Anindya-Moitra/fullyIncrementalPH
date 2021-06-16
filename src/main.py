@@ -390,3 +390,22 @@ for currVec in data:
                         # Recompute the average nearest neighbor distance in the partition from which the
                         # point was deleted.
 
+                        # If there is only 1 point left in the partition that the point was deleted from:
+                        if numPointsPartn[deletedLabel] == 1:
+                            avgNNDistPartitions[deletedLabel] = -1
+
+                        else:
+                            nnDistsDelPartition = []
+                            for i in delPmemIndices:
+                                row = [distMat[i, :i][j] for j in delPmemIndices if j < i]
+                                column = [distMat[i + 1:, i][j - (i + 1)] for j in delPmemIndices if j > i]
+                                distsFromPoint = np.append(row, column)
+                                nnDistPoint = min(distsFromPoint)
+                                nnDistsDelPartition.append(nnDistPoint)
+
+                            avgNNdDelPartition = statistics.mean(nnDistsDelPartition)
+                            avgNNDistPartitions[deletedLabel] = avgNNdDelPartition
+
+                    print("Point Added")
+
+
