@@ -366,6 +366,20 @@ for currVec in data:
                     deletedLabel = partitionLabels.pop(0)  # Delete the label from the front of the list.
                     window = np.delete(window, 0, axis=0)  # Delete the vector from the front of the sliding window.
 
+                    deletedVector = window[0]
+
+                    # Get the vertex, edges and weights that are being deleted from the neighborhood graph and
+                    # from the complex. Reuse the 'buildGraph' function.
+                    vertexDel, edgesDel, weightsDel = fsc.buildGraph(dataPoints=deletedVector,
+                                                                     epsilon=eps, metric=euclidianDist)
+
+                    # Delete the simplices corresponding to 'vertexDel' from the filtration
+                    sortedSimplices, delIndices = fsc.deleteSimplices(sortedSimplices, vertexDel)
+
+                    # Delete the columns and rows corresponding to the deleted simplices from the reduced
+                    # boundary matrix and memory matrix.
+                    reducedMatrix, memoryMatrix = mr.delColsRows(reducedMatrix, memoryMatrix, delIndices)
+
                     # Delete the 0-th row and 0-th column from the distance matrix.
                     distMat = np.delete(np.delete(distMat, 0, axis=0), 0, axis=1)
 
