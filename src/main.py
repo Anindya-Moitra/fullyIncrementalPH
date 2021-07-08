@@ -435,6 +435,17 @@ for currVec in data:
                     zeroColumn = np.array([0] * windowMaxSize).reshape(windowMaxSize, 1)
                     distMat = np.append(distMat, zeroColumn, axis=1)  # Add a column to the right of the matrix.
 
+                    InsertedVector = currVec
+
+                    # Get the vertex, edges and weights that are being added to the neighborhood graph and
+                    # to the complex.
+                    vertexAdd, edgesAdd, weightsAdd = fsc.buildGraph(dataPoints=InsertedVector,
+                                                                     epsilon=eps, metric=euclidianDist)
+
+                    sortedSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
+
+                    reducedMatrix, memoryMatrix = mr.addColsRows(reducedMatrix, memoryMatrix, newSimplices)
+
                     # Add a new key, value pair to the dictionary of partitions and their average nearest neighbor
                     # distances. In this case, however, the newly created partition has only one point. So, at this
                     # time, we insert a value of -1 for the average nearest neighbor distance of the new point.
@@ -442,6 +453,5 @@ for currVec in data:
                     numPointsPartn[targetPartition] = 1
 
                 else:  # The current vector is assigned to one of the existing partitions:
-                    # Find the first occurrence of a partition label != targetPartition label.
 
 
