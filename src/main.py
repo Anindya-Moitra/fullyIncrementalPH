@@ -453,5 +453,19 @@ for currVec in data:
                     numPointsPartn[targetPartition] = 1
 
                 else:  # The current vector is assigned to one of the existing partitions:
+                    # Find the first occurrence of a partition label != targetPartition label.
+                    for i in range(windowMaxSize):
+                        if partitionLabels[i] != targetPartition:
+                            deletedLabel = partitionLabels[i]
+                            indexToBeDeleted = i
+                            del partitionLabels[i]  # Delete the partition label.
+                            break
+
+                    del windowKeys[indexToBeDeleted]  # Delete the key of the vector.
+                    window = np.delete(window, indexToBeDeleted, axis=0)  # Delete the vector from the sliding window.
+
+                    # Delete the corresponding row and column from the distance matrix.
+                    distMat = np.delete(np.delete(distMat, indexToBeDeleted, axis=0), indexToBeDeleted, axis=1)
+
 
 
