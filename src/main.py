@@ -467,5 +467,23 @@ for currVec in data:
                     # Delete the corresponding row and column from the distance matrix.
                     distMat = np.delete(np.delete(distMat, indexToBeDeleted, axis=0), indexToBeDeleted, axis=1)
 
+                    # Delete the corresponding distance value from the list of distances from the current vector
+                    # to the existing ones in the window.
+                    del distsFromCurrVec[indexToBeDeleted]
+
+                    # Find the positions of the points (in the window) that are members of the partition
+                    # from which the point was deleted.
+                    delPmemIndices = [i for i, pl in enumerate(partitionLabels) if pl == deletedLabel]
+
+                    # If there are no more points left in the partition from which the deletion took place:
+                    if not delPmemIndices:
+                        del avgNNDistPartitions[deletedLabel]
+                        del numPointsPartn[deletedLabel]
+                        del maxKeys[deletedLabel]
+
+                    else:
+                        # Decrement the number of points in the partition from which the point was deleted by 1.
+                        numPointsPartn[deletedLabel] = numPointsPartn[deletedLabel] - 1
+
 
 
