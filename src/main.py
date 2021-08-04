@@ -476,7 +476,7 @@ for currVec in data:
                     # Delete the columns and rows corresponding to the deleted simplices from the reduced
                     # boundary matrix and memory matrix.
                     reducedMatrix, memoryMatrix = mr.delColsRows(reducedMatrix, memoryMatrix, delIndices)
-                    
+
                     window = np.delete(window, indexToBeDeleted, axis=0)  # Delete the vector from the sliding window.
 
                     # Delete the corresponding row and column from the distance matrix.
@@ -518,10 +518,23 @@ for currVec in data:
                             avgNNdDelPartition = statistics.mean(nnDistsDelPartition)
                             avgNNDistPartitions[deletedLabel] = avgNNdDelPartition
 
-
                     # Insert the current vector, its key and partition label into the rear ends
                     # of the corresponding containers.
                     window = np.append(window, currVec, axis=0)
+                    windowKeys.append(key)
+                    partitionLabels.append(targetPartition)
+                    maxKeys[targetPartition] = key  # Update the maxKey of the target partition.
+
+                    key += 1
+
+                    # Update the distance matrix.
+                    distsFromCurrVecArray = np.array(distsFromCurrVec).reshape(1, windowMaxSize - 1)
+                    distMat = np.append(distMat, distsFromCurrVecArray, axis=0)  # Add a row to the bottom of the matrix
+                    zeroColumn = np.array([0] * windowMaxSize).reshape(windowMaxSize, 1)
+                    distMat = np.append(distMat, zeroColumn, axis=1)  # Add a column to the right of the matrix.
+
+                    # Retrieve the avg. nearest neighbor distance in the target partition.
+                    avgNNdTP = avgNNDistPartitions[targetPartition]
 
 
 
