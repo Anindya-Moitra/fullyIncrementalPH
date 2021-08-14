@@ -533,6 +533,17 @@ for currVec in data:
                     zeroColumn = np.array([0] * windowMaxSize).reshape(windowMaxSize, 1)
                     distMat = np.append(distMat, zeroColumn, axis=1)  # Add a column to the right of the matrix.
 
+                    InsertedVector = currVec
+
+                    # Get the vertex, edges and weights that are being added to the neighborhood graph and
+                    # to the complex.
+                    vertexAdd, edgesAdd, weightsAdd = fsc.buildGraph(dataPoints=InsertedVector,
+                                                                     epsilon=eps, metric=euclidianDist)
+
+                    sortedSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
+
+                    reducedMatrix, memoryMatrix = mr.addColsRows(reducedMatrix, memoryMatrix, newSimplices)
+
                     # Retrieve the avg. nearest neighbor distance in the target partition.
                     avgNNdTP = avgNNDistPartitions[targetPartition]
 
