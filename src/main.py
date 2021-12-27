@@ -547,5 +547,33 @@ for currVec in data:
                     # Retrieve the avg. nearest neighbor distance in the target partition.
                     avgNNdTP = avgNNDistPartitions[targetPartition]
 
+                    # Update the distance matrix.
+                    distsFromCurrVecArray = np.array(distsFromCurrVec).reshape(1, windowMaxSize - 1)
+                    distMat = np.append(distMat, distsFromCurrVecArray, axis=0)  # Add a row to the bottom of the matrix
+                    zeroColumn = np.array([0] * windowMaxSize).reshape(windowMaxSize, 1)
+                    distMat = np.append(distMat, zeroColumn, axis=1)  # Add a column to the right of the matrix.
 
+                    # Retrieve the avg. nearest neighbor distance in the target partition.
+                    avgNNdTP = avgNNDistPartitions[targetPartition]
 
+                    if avgNNdTP == -1:  # If the target partition previously had only 1 point:
+                        # Update the avg. nearest neighbor distance of the partition the current vector was added to.
+                        avgNNDistPartitions[targetPartition] = nnDistsFrmCurrVecToPartns[targetPartition]
+                        numPointsPartn[targetPartition] = 2
+
+                    else:
+                        # Find the positions of the points (in the window) that are members of the target partition.
+                        tpMemIndices = [i for i, tp in enumerate(partitionLabels) if tp == targetPartition]
+
+                        # Recompute the average nearest neighbor distance in the target partition.
+                        nnDistsTP = []
+                        for i in tpMemIndices:
+                            row = [distMat[i, :i][j] for j in tpMemIndices if j < i]
+                            column = [distMat[i + 1:, i][j - (i + 1)] for j in tpMemIndices if j > i]
+                            distsFromPoint = np.append(row, column)
+                            nnDistPoint = min(distsFromPoint)
+                            nnDistsTP.append(nnDistPoint)
+
+                        avgNNdTargetPartn = statistics.mean(nnDistsTP)
+                        avgNNDistPartitions[targetPartition] = avgNNdTargetPartn
+                        numPointsPartn[targetPartition] = numPointsPartn[targetPartition] + 1
