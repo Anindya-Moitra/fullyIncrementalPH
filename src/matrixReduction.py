@@ -2,6 +2,7 @@
 # Courtesy: A. Zomorodian and G. Carlsson, “Computing persistent homology,” 2005, and outlace.com
 
 import numpy as np
+import boundaryMatrix as bm
 
 # A function to return the row index of the lowest 1 (pivot) in a column i in the boundary matrix
 def low(i, matrix):
@@ -55,9 +56,22 @@ def delColsRows(reducedMatrix, memoryMatrix, delIndices):
     return reducedMatrix, memoryMatrix
 
 
-def addColsRows(reducedMatrix, memoryMatrix, newSimplices):
+def addColsRows(reducedMatrix, memoryMatrix, newSimplices, sortedSimplices):
 
     # A function to incrementally add the columns and rows corresponding to the already
     # reduced boundary matrix, and then further reduce the matrix, if needed.
+
+    for simplex in newSimplices:
+        # For each simplex in the list of new simplices that needs to be added to the reduced
+        # boundary matrix, first find its index with respect to the total ordering.
+        allSimplices = sortedSimplices[0]  # The first (0-th) element is the list of simplices.
+        indexNewSimplex = allSimplices.index(simplex)
+
+        col_j = []
+
+        # Construct the column for the new simplex
+        for existingSimplex in allSimplices:
+            col_j.append(bm.checkFace(existingSimplex, simplex))
+
 
     return reducedMatrix, memoryMatrix
