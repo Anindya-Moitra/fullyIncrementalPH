@@ -68,10 +68,24 @@ def addColsRows(reducedMatrix, memoryMatrix, newSimplices, sortedSimplices):
         indexNewSimplex = allSimplices.index(simplex)
 
         col_j = []
+        rowIndex = 0
 
         # Construct the column for the new simplex
         for existingSimplex in allSimplices:
-            col_j.append(bm.checkFace(existingSimplex, simplex))
+
+            # Apply the 'compression' technique while constructing the column
+            entry = bm.checkFace(existingSimplex, simplex)
+
+            if entry == 1:
+                # Check if the 'rowIndex' column of the reduced matrix is all zeros
+                col_i = reducedMatrix[:, rowIndex]
+                if 1 in col_i:  # If the 'rowIndex' column of the reduced matrix is not zero:
+                    entry = 0
+
+            col_j.append(entry)
+            rowIndex += 1
+
+        
 
 
     return reducedMatrix, memoryMatrix
