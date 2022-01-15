@@ -167,9 +167,10 @@ for currVec in data:
                 vertexAdd, edgesAdd, weightsAdd = fsc.buildGraph(dataPoints=InsertedVector,
                                                                  epsilon=eps, metric=euclidianDist)
 
-                sortedSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
+                newSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
 
-                reducedMatrix, memoryMatrix = mr.addColsRows(reducedMatrix, memoryMatrix, newSimplices, sortedSimplices)
+                reducedMatrix, memoryMatrix, sortedSimplices = mr.addColsRows(reducedMatrix, memoryMatrix,
+                                                                              newSimplices, sortedSimplices)
 
                 # Update the distance matrix.
                 distsFromCurrVecArray = np.array(distsFromCurrVec).reshape(1, windowMaxSize - 1)
@@ -324,9 +325,10 @@ for currVec in data:
                 vertexAdd, edgesAdd, weightsAdd = fsc.buildGraph(dataPoints=InsertedVector,
                                                                  epsilon=eps, metric=euclidianDist)
 
-                sortedSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
+                newSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
 
-                reducedMatrix, memoryMatrix = mr.addColsRows(reducedMatrix, memoryMatrix, newSimplices, sortedSimplices)
+                reducedMatrix, memoryMatrix, sortedSimplices = mr.addColsRows(reducedMatrix, memoryMatrix,
+                                                                              newSimplices, sortedSimplices)
 
                 if targetPartition not in avgNNDistPartitions:  # If the current vector was assigned a new partition:
                     avgNNDistPartitions[targetPartition] = -1
@@ -442,9 +444,10 @@ for currVec in data:
                     vertexAdd, edgesAdd, weightsAdd = fsc.buildGraph(dataPoints=InsertedVector,
                                                                      epsilon=eps, metric=euclidianDist)
 
-                    sortedSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
+                    newSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
 
-                    reducedMatrix, memoryMatrix = mr.addColsRows(reducedMatrix, memoryMatrix, newSimplices, sortedSimplices)
+                    reducedMatrix, memoryMatrix, sortedSimplices = mr.addColsRows(reducedMatrix, memoryMatrix,
+                                                                                  newSimplices, sortedSimplices)
 
                     # Add a new key, value pair to the dictionary of partitions and their average nearest neighbor
                     # distances. In this case, however, the newly created partition has only one point. So, at this
@@ -540,9 +543,10 @@ for currVec in data:
                     vertexAdd, edgesAdd, weightsAdd = fsc.buildGraph(dataPoints=InsertedVector,
                                                                      epsilon=eps, metric=euclidianDist)
 
-                    sortedSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
+                    newSimplices = fsc.incrementalRipsComplex(vertexAdd, edgesAdd, weightsAdd, k)
 
-                    reducedMatrix, memoryMatrix = mr.addColsRows(reducedMatrix, memoryMatrix, newSimplices, sortedSimplices)
+                    reducedMatrix, memoryMatrix, sortedSimplices = mr.addColsRows(reducedMatrix, memoryMatrix,
+                                                                                  newSimplices, sortedSimplices)
 
                     # Retrieve the avg. nearest neighbor distance in the target partition.
                     avgNNdTP = avgNNDistPartitions[targetPartition]

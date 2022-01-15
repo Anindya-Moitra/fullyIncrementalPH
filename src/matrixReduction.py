@@ -2,6 +2,7 @@
 # Courtesy: A. Zomorodian and G. Carlsson, “Computing persistent homology,” 2005, and outlace.com
 
 import numpy as np
+from bisect import bisect
 import boundaryMatrix as bm
 
 # A function to return the row index of the lowest 1 (pivot) in a column i in the boundary matrix
@@ -61,11 +62,10 @@ def addColsRows(reducedMatrix, memoryMatrix, newSimplices, sortedSimplices):
     # A function to incrementally add the columns and rows corresponding to the already
     # reduced boundary matrix, and then further reduce the matrix, if needed.
 
-    for simplex in newSimplices:
+    for simplex, weight in zip(newSimplices[0], newSimplices[1]):
         # For each simplex in the list of new simplices that needs to be added to the reduced
         # boundary matrix, first find its index with respect to the total ordering.
         allSimplices = sortedSimplices[0]  # The first (0-th) element is the list of simplices.
-        indexNewSimplex = allSimplices.index(simplex)
 
         col_j = []
         rowIndex = 0
@@ -83,9 +83,29 @@ def addColsRows(reducedMatrix, memoryMatrix, newSimplices, sortedSimplices):
                     entry = 0
 
             col_j.append(entry)
+            col_j.append(0)  # The last additional entry
             rowIndex += 1
 
-        
+        # Insert a row and column to the reduced matrix for the current simplex.
+        dim_reducedMatrix = reducedMatrix.shape[0]  # It is a sqaure matrix
+
+        # The last row of the matrix is always zero because the highest dimensional simplex
+        # cannot be a face of another simplex in the filtration.
+        lastRow = np.zeros(dim_reducedMatrix)
+
+        reducedMatrix = np.append(reducedMatrix, lastRow,
+                                  axis=0)  # Add the zero row to the bottom of the matrix
 
 
-    return reducedMatrix, memoryMatrix
+        # Find the index/position of the current simplex within the reduced boundary matrix
+
+        # sortedSimplices[1] is the sorted list of weights of the existing simplices in the filtration
+        insersionIndex = bisect(sortedSimplices[1], weight)
+        reducedMatrix = np.hstack((reducedMatrix[:, :insersionIndex], col_j, reducedMatrix[:, insersionIndex:]))
+
+        # Update the existing weight-filtered complex
+        sortedSimplices[0].insert(insersionIndex, simplex)
+        sortedSimplices[1].insert(insersionIndex, weight)
+
+
+    return reducedMatrix, memoryMatrix, sortedSimplices
