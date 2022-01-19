@@ -3,6 +3,7 @@ import numpy as np
 import statistics
 import random
 
+import partitionMembership as pm
 import filteredSimplicialComplex as fsc
 import boundaryMatrix as bm
 import matrixReduction as mr
@@ -221,7 +222,7 @@ for currVec in data:
             # Determine the membership of the current vector to one of the existing partitions in the window.
             # If the current vector cannot be assigned to any of the existing partitions, create a new partition
             # with only the current vector.
-            targetPartition = determineMembership(nnDistsFrmCurrVecToPartns, avgNNDistPartitions, f2, f3)
+            targetPartition = pm.determineMembership(nnDistsFrmCurrVecToPartns, avgNNDistPartitions, f2, f3)
 
             # Find the outdated partition(s).
             outdatedPartn = [op for op in maxKeys if (key - maxKeys[op]) > timeToBeOutdated]
