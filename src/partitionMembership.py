@@ -19,3 +19,27 @@ def determineMembership(nnDistsFrmCurrVecToPartns, avgNNDistPartitions, f2, f3):
 
     existingLabels = list(avgNNDistPartitions.keys())  # Create a list of existing partition labels in the window.
     maxLabel = max(existingLabels)  # Find the max. of the existing partition labels.
+
+    # If the minimum distance from the current vector to existing partitions is higher than f2,
+    # assign a new partition to the current vector.
+    if minDistFrmCurrVecToPartn > f2:
+        return maxLabel + 1
+
+    candidatePartns = []
+    for partn in avgNNDistPartitions:
+        if avgNNDistPartitions[partn] == -1 and nnDistsFrmCurrVecToPartns[partn] <= f2:
+            candidatePartns.append(partn)
+
+        elif avgNNDistPartitions[partn] <= f3 and nnDistsFrmCurrVecToPartns[partn] <= 1:
+            candidatePartns.append(partn)
+
+        elif avgNNDistPartitions[partn] > 0 and nnDistsFrmCurrVecToPartns[partn] / avgNNDistPartitions[partn] <= f2:
+            candidatePartns.append(partn)
+
+    nearestCandidatePartns = list(set(nearestPartitions) & set(candidatePartns))
+
+    if len(nearestCandidatePartns) != 0:
+        assignedPartition = max(nearestCandidatePartns)
+        return assignedPartition
+
+    return maxLabel + 1
